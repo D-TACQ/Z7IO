@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo z7io_init_gpio
+
+

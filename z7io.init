@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/usr/local/bin/z7io_init_gpio
+FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" /usr/local/bin/fmc-scan
+
+
