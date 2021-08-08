@@ -1,5 +1,6 @@
 #!/bin/sh
 
+dump-cstrings < /mnt/uboot.env | grep -v \\$ > /tmp/u-boot_env
 /usr/local/bin/z7io_init_gpio
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" /usr/local/bin/fmc-scan
 
