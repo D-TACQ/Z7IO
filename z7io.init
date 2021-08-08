@@ -1,6 +1,9 @@
 #!/bin/sh
 
-dump-cstrings < /mnt/uboot.env | grep -v \\$ | grep -v ' ' > /tmp/u-boot_env
+dump-cstrings < /mnt/uboot.env | 
+	grep -v \\$ | grep -v ' ' | 
+	sed -e 's/devicetree_acq400/devicetree_image/' |
+	> /tmp/u-boot_env
 /usr/local/bin/z7io_init_gpio
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" /usr/local/bin/fmc-scan
 
