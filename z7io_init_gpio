@@ -1,5 +1,8 @@
 #!/bin/sh
 
 echo z7io_init_gpio
+echo stub /usr/local/bin/load.cpld_spi_overlay
+echo MUST happen later after FPGA loaded.
+
 
 
