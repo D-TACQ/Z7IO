@@ -1,0 +1,9 @@
+CFG=/sys/kernel/config
+mount | grep -q $CFG
+[ $? -eq 0 ] || mount -t configfs none $CFG
+
+SPI=$CFG/device-tree/overlays/cpld_spi
+mkdir -p $SPI
+cat /mnt/dtb.d/z7io_cpld_overlay.dtb > $SPI/dtbo
+/sbin/insmod /usr/local/lib/modules/spidev.ko
+

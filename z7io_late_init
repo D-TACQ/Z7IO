@@ -1,0 +1,9 @@
+#!/bin/sh
+# z7io late initialization after FPGA and device driver is loaded
+/usr/local/CARE/Z7IO/load.cpld_spi_overlay
+sleep 1
+/usr/local/CARE/Z7IO/z7io_init_gpio
+rm -f /dev/sites/?/*
+FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" NOLOAD=1 /usr/local/bin/fmc-scan
+
+

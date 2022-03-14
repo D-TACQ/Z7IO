@@ -1,8 +1,70 @@
 #!/bin/sh
 
-echo z7io_init_gpio
-echo stub /usr/local/bin/load.cpld_spi_overlay
-echo MUST happen later after FPGA loaded.
+source /usr/local/bin/acq400_init_gpio_common.sh
+
+common_begin
+
+# i2c gpio
+
+get_gpiochip() 
+{
+	echo $(basename $(echo /sys/bus/i2c/devices/$1-$2/gpio/gpiochip*))	
+}
+
+# WARNING: MUST be BUS 2, if Z7IO bus expander is fleshed out in DT, this will change
+RTM_I2C_BUS=2
+
+if [ ! -e /sys/bus/i2c/devices/i2c-$RTM_I2C_BUS ]; then
+	echo ERROR: ACQ400-MTCA-RTM2 NOT PRESENT
+	exit 1
+fi
 
 
 
+CHIP121=$(get_gpiochip $RTM_I2C_BUS 0021) 
+let GPIO_MB1=${CHIP121#gpiochip*}
+let GPIO_MB2=$GPIO_MB1+7
+
+
+for pin in $(seq $GPIO_MB1 $GPIO_MB2) 
+do
+	export_gpio $pin
+done
+
+let px=$GPIO_MB1
+for dir in O O O O I I O O
+do
+	if [ "$dir" = "O" ]; then
+		setO gpio$px
+	else
+		setAL gpio$px
+	fi
+	let px=$px+1
+done
+
+
+gpioXXX() {
+	let lgp=$GPIO_MB1+$1
+	echo gpio$lgp
+}
+
+
+mkdir -p /dev/gpio/LED
+mkln $(gpioXXX  0) LED/FMC1_G
+mkln $(gpioXXX  1) LED/FMC1_R
+mkln $(gpioXXX  2) LED/FMC2_G
+mkln $(gpioXXX  3) LED/FMC2_R
+mkln $(gpioXXX  4) fmc1_present		AL
+mkln $(gpioXXX  5) fmc2_present		AL
+mkln $(gpioXXX  6) VA_EN		AL
+mkln $(gpioXXX  7) VD_EN
+
+
+common_end	
+
+echo "++ enable RTM power"
+echo 1 > /dev/gpio/VD_EN
+echo 1 > /dev/gpio/VA_EN
+
+
+echo "++ z7io_init_gpio done"
