@@ -15,6 +15,4 @@ if __name__ == '__main__':
   logger = logging.getLogger(__name__)
 
   fpio_ctrl = FPIOCtrl()
-
-  logger.debug("NEW API COMMAND TO INIT FPIO")
   fpio_ctrl.buf_init_single(0, FPIODir.IN, FPIOLevel.LEVEL_3V3, FPIORouting.APP)
