@@ -14,10 +14,15 @@ get_gpiochip()
 # WARNING: MUST be BUS 2, if Z7IO bus expander is fleshed out in DT, this will change
 RTM_I2C_BUS=2
 
-if [ ! -e /sys/bus/i2c/devices/i2c-$RTM_I2C_BUS ]; then
-	echo ERROR: ACQ400-MTCA-RTM2 NOT PRESENT
-	exit 1
-fi
+retry=0
+while [ ! -e /sys/bus/i2c/devices/i2c-$RTM_I2C_BUS ]; do
+	usleep 500000
+	retry=$((retry+1))
+	if [ $retry -ge 10 ]; then
+		echo ERROR: ACQ400-MTCA-RTM2 NOT PRESENT
+		exit 1
+	fi
+done
 
 
 
