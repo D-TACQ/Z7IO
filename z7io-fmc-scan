@@ -1,0 +1,236 @@
+#!/bin/sh
+# ACQ2006B_TOP_01_01_ff_ff_ff_ff
+
+if [ -e /mnt/local/fmc-scan.conf ]; then
+	echo +++ fmc-scan using /mnt/local/fmc-scan.conf
+	source /mnt/local/fmc-scan.conf
+fi
+if [ "$FMC_SCAN_FPGA" = "" ]; then
+	echo ERROR: FMC_SCAN_FPGA not set
+	exit 1
+fi
+if [ "$FMC_SCAN_SITES" = "" ]; then
+	echo ERROR: FMC_SCAN_SITES not set
+	exit 1
+fi
+
+mkdir -p /dev/sites
+rm -Rf /dev/sites/*
+
+let module_count=0
+
+all_sites=""
+
+for PRD in /dev/gpio/*present
+do
+	_PRDx=${PRD#/dev/gpio/fmc}
+	if [ "$_PRDx" = "$PRD" ]; then
+		_PRDx=${PRD#/dev/gpio/pmod}				
+	fi
+	if [ "$_PRDx" = "$PRD" ]; then
+		echo ERROR $PRD not supported
+		exit 1
+	fi
+	site=${_PRDx%_present}
+	if [ $(cat $PRD) -ne 0 ]; then
+		# PMODS are faked .. don't try make them again0
+		if [ ! -e /dev/sites/$site ]; then  
+			mkdir /dev/sites/$site
+			BUS=$((site+2))
+			# mtca shim puts the eeprom at non-standard address
+			for ba in 0050 0051 0052
+			do
+				eeprom=/sys/bus/i2c/devices/${BUS}-${ba}/eeprom
+				if [ -e ${eeprom} ]; then
+					ln -s ${eeprom} /dev/sites/$site
+					break
+				fi
+			done
+#			set.sys /dev/gpio/LED/FMC${site}_R 1
+			all_sites="$all_sites $site"
+		fi
+		let module_count=$module_count+1	
+	fi
+done
+
+SITES=""
+GOOD_SITES=""
+
+aappend() {
+	if [ -z $2 ]; then
+		echo $1
+	else
+		echo $1,$2
+	fi
+}
+
+let site_count=0
+MTYPES=""
+
+#acq2006_006> cat /dev/sites/5/details 
+#FRU_MAN="D-TACQ Solutions"
+#FRU_PROD_NAME="AO421ELF"
+#FRU_SERIAL="E42100001"
+#FRU_PART_NUM="AO421ELF"
+# and the new ones
+#M=f0
+#N=40
+
+decode_fru_success=0
+
+
+decode_fru() {
+	
+	site=$1
+	details=$2
+	sdir=/etc/acq400/$site
+	
+	mkdir -p $sdir
+	echo -n "++ decode FRU EEPROM site $site "
+
+	FRU_MAN=xx
+	FRU_PROD_NAME=xx
+	FRU_SERIAL=xx
+	FRU_PART_NUM=xx
+	FRU_MTYPE=xx
+	FRU_NCHAN=xx
+	M=x
+	N=x		
+		
+	nchan=4
+	source $details
+	mn=$(echo $FRU_PART_NUM | cut -d\  -f 2-  )
+	if [ "$mn" != "$FRU_PART_NUM" ]; then
+#		echo FRU_PART_NUM \"$FRU_PART_NUM\" \"$mn\"
+		eval $mn
+	fi
+	
+	if [ "$N" = "x" -o "M" = "x" ]; then
+		decode_fru_success=0
+		echo ERROR: obsolete EEPROM please contact D-TACQ for update
+		return		
+	fi
+	
+	echo $N > $sdir/NCHAN
+	echo $M > $sdir/MTYPE
+	echo $FRU_SERIAL > $sdir/SERIAL
+	echo "$FRU_MAN" > $sdir/MANUFACTURER	
+	echo $FRU_PART_NUM > $sdir/PART_NUM	
+
+	_IFS=$IFS
+	IFS='-'
+	let ii=0
+	for field in $FRU_PART_NUM
+	do
+#		echo decode FRU_PART_NUM: $FRU_PART_NUM: ii $ii field $field
+		case $ii in
+		0) [ -e $sdir/MODEL ] || echo $field > $sdir/MODEL;;
+		1) nchan=$(echo $field | sed -e 's/[^0-9]//g')		
+		   [ -e $sdir/NCHAN ] || echo $nchan  > $sdir/NCHAN;;
+		2) echo $field > $sdir/MAXRATE;;
+		3) echo $field > $sdir/RESOLUTION;;
+		esac
+		let ii=$ii+1
+		if [ $ii -eq 2 -a "$M" != "01" ]; then
+			# next fields valid ACQ420 only
+			break;
+		fi
+	done
+	IFS=$_IFS			
+
+	grep -q FRU_PROD_NAME $details
+	if [ $? -eq 0 ]; then
+		decode_fru_success=1
+		echo OK;
+	else
+		echo FAIL;
+	fi
+
+	chmod 444 ${sdir}/*
+}
+
+good_sites=""
+
+for sd in /dev/sites/?
+do
+	if [ -d $sd ]; then
+		site=$(basename $sd)
+		SITES=$(aappend $SITES $site)
+		fru-dump-acq ${sd}/eeprom > ${sd}/details
+	
+		decode_fru_success=0
+		decode_fru $site ${sd}/details
+		if [ $decode_fru_success -ne 0 ]; then
+			GOOD_SITES=$(aappend $GOOD_SITES $site)
+			good_sites="$good_sites $site"
+		fi
+	fi
+done
+
+#echo SITES \"$SITES\"
+#echo GOOD_SITES \"$GOOD_SITES\"
+#echo good_sites \"$good_sites\"
+
+
+get_mtype()
+{
+	if [ -e /etc/acq400/$1/MTYPE ]; then
+		cat /etc/acq400/$1/MTYPE
+	else
+		echo ff
+	fi
+}
+
+is_gzip_file() {
+	echo $1 | grep -q \.gz$
+}
+
+for site in $good_sites
+do	
+#	set.sys /dev/gpio/LED/FMC${site}_R 0
+	set.sys /dev/gpio/LED/FMC${site}_G 1
+	let site_count=$site_count+1
+done
+
+echo "sites=$SITES" > /etc/sites
+echo "good_sites=$GOOD_SITES" >>/etc/sites
+
+source /etc/sites
+
+get_model_code() {
+    model=$(cat /etc/acq400/$1/MODEL)
+    if [ "${model#DIO*}" != "${model}" ]; then
+    	echo dio
+    elif [ "${model#AO*}" != "${model}" ]; then
+    	echo ao
+    else
+    	echo ${model} | tr -d [A-Za-z] | awk '{ print $1 }'
+    fi
+}
+
+
+
+SITELIST=$(get_model_code 0 | tr -d 0)
+if [ "$SITELIST" = "21637" ]; then
+	SITELIST=237
+fi
+
+for site in $(echo $sites | tr ,C \  )
+do
+	SITELIST="${SITELIST},${site}=$(get_model_code $site)"	
+done
+
+echo "$SITELIST" >/etc/acq400/0/SITELIST
+echo "$SL2" >/etc/acq400/0/SL2
+
+if [ "x$sites" = "x$good_sites" ]; then
+	echo ++ Sites populated: $site_count ALL GOOD
+else
+    [ "x$good_sites" = "x" ] && good_sites=NONE
+	echo ++ Sites populated: $site_count WARNING: FOUND:$sites GOOD:$good_sites
+fi
+
+clean_release_report
+
+echo done > $scan_done
+
