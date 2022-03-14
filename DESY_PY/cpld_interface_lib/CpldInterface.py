@@ -24,7 +24,7 @@ class CpldInterface:
         REG_MLVDS_DATA_OUT = 0x21
 
     REG_ID_EXPECT = 0xC9
-    REG_VER_EXPECT = 0x08
+    REG_VER_EXPECT = 0x11
 
     def __init__(self):
         self.logger = logging.getLogger(__class__.__name__)

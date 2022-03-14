@@ -11,12 +11,13 @@ logging.addLevelName(LEVEL_TRACE, "TRACE")
 
 class CpldSpiDriver:
 
-    Z7IO_SPI_BUS = 1
+    Z7IO_SPI_BUS = 3
     Z7IO_CPLD_SPI_DEV = 0
 
     def __init__(self):
 
         self.dev = spidev.SpiDev()
+        print("SPI_BUS {} SPI_DEV {}".format(self.Z7IO_SPI_BUS, self.Z7IO_CPLD_SPI_DEV))
         self.dev.open(self.Z7IO_SPI_BUS, self.Z7IO_CPLD_SPI_DEV)
         self.dev.max_speed_hz = 25000000
 
