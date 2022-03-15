@@ -192,9 +192,6 @@ do
 	let site_count=$site_count+1
 done
 
-echo "sites=$SITES" > /etc/sites
-echo "good_sites=$GOOD_SITES" >>/etc/sites
-
 source /etc/sites
 
 get_model_code() {
@@ -229,8 +226,3 @@ else
     [ "x$good_sites" = "x" ] && good_sites=NONE
 	echo ++ Sites populated: $site_count WARNING: FOUND:$sites GOOD:$good_sites
 fi
-
-clean_release_report
-
-echo done > $scan_done
-

@@ -1,8 +1,12 @@
 #!/bin/sh
 
+# PS1='z7io_dbg>' /bin/sh
 source /usr/local/bin/acq400_init_gpio_common.sh
 
-common_begin
+#common_begin
+
+mkdir -p /dev/gpio
+cd /sys/class/gpio
 
 # i2c gpio
 
