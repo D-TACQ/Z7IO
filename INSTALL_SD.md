@@ -15,6 +15,13 @@ eg release 485:
 tar xvf acq400-485-??????????????.tar 
 ```
 
+3.1 change directory
+here we assume "SD" is the mount point of the SD card on your computer
+
+```
+pushd SD
+```
+
 3.3 copy the kernel
 
 ```
@@ -24,13 +31,19 @@ cp uImage uImage.acq400
 3.5 Unpack the rootfs
 
 ```
-(cd SD; gunzip rootfs.tar.gz)
+gunzip rootfs.tar.gz
 ```
 
 3.6 Install Payload customization
 
 ```
-(cd SD; mv packages.opt/04-custom_z7io_payload_acq424-??????????.tgz packages
+mv packages.opt/04-custom_z7io_payload_acq424-??????????.tgz packages
+```
+
+3.9 change back to original directory
+
+```
+popd
 ```
 
 4. Copy FPGA images to set to the SD
