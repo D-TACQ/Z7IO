@@ -17,7 +17,9 @@ tar xvf acq400-485-??????????????.tar
 
 3.3 copy the kernel
 
+```
 cp uImage uImage.acq400
+```
 
 3.5 Unpack the rootfs
 
