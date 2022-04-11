@@ -62,7 +62,7 @@ set flow-control none
 set carrier-watch off
 ```
 
-6. Boot the z7io, break into u-boot by pressing <SPACE>
+6. Boot the z7io, break into u-boot by pressing `<SPACE>`
 
 7. Modify and install a u-boot environment to z7io QSPI FLASH
 
