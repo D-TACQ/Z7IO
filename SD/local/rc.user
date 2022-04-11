@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo /mnt/local/rc.user  01
+echo /mnt/local/rc.user  99
+
+
