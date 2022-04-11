@@ -76,7 +76,7 @@ saveenv
 
 7. Boot the z7io
 
-8. The z7io will boot as a standard ACQ400 SYSTEM with RTM2 and 2xACQ424
+   - The z7io will boot as a standard ACQ400 SYSTEM with RTM2 and 2xACQ424
 
 By default z7io will try to get a network address using dhcp.
 You should use the table SD/local/sysconfig/machosts to configure your dhcp server.
