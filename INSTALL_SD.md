@@ -24,6 +24,7 @@ pushd SD
 
 3.3 copy the kernel
 
+No longer required:
 ```
 cp uImage uImage.acq400
 ```
@@ -54,10 +55,17 @@ cp fpga-485-??????????????.img SD/ko
 
 5. Insert the SD card, connect to the z7io CONSOLE at 115200baud
 
+Disable flow control (example for kermit)
+```
+root@rpi-008:~# cat .kermrc
+set flow-control none
+set carrier-watch off
+```
+
 6. Boot the z7io, break into u-boot by pressing <SPACE>
 
 7. Modify and install a u-boot environment to z7io QSPI FLASH
-
+NB: do this ONCE only in the lifetime of the z7io
 ```
 fatload mmc 0 0x4000000 uboot.env
 env import -b 0x4000000
