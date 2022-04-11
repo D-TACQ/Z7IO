@@ -31,7 +31,7 @@ cp uImage uImage.acq400
 3.5 Unpack the rootfs
 
 ```
-gunzip rootfs.tar.gz
+gunzip rootfs.ext2.gz
 ```
 
 3.6 Install Payload customization
