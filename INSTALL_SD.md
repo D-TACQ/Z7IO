@@ -15,33 +15,33 @@ eg release 485:
 tar xvf acq400-485-??????????????.tar 
 ```
 
-3.1 change directory
+   - change directory
 here we assume "SD" is the mount point of the SD card on your computer
 
 ```
 pushd SD
 ```
 
-3.3 copy the kernel
+   - copy the kernel
 
 *No longer required:*
 ```
 cp uImage uImage.acq400
 ```
 
-3.5 Unpack the rootfs
+   - Unpack the rootfs
 
 ```
 gunzip rootfs.ext2.gz
 ```
 
-3.6 Install Payload customization
+   - Install Payload customization
 
 ```
-mv packages.opt/04-custom_z7io_payload_acq424-??????????.tgz packages
+mv packages.opt/02-custom_z7io_payload_acq424-??????????.tgz packages
 ```
 
-3.9 change back to original directory
+   - change back to original directory
 
 ```
 popd
