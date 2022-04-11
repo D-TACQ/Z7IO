@@ -64,9 +64,9 @@ set carrier-watch off
 
 6. Boot the z7io, break into u-boot by pressing `<SPACE>`
 
-7. Modify and install a u-boot environment to z7io QSPI FLASH
-
 *do this ONCE only in the lifetime of the z7io*
+
+   - Modify and install a u-boot environment to z7io QSPI FLASH
 
 ```
 fatload mmc 0 0x4000000 uboot.env
@@ -74,9 +74,9 @@ env import -b 0x4000000
 saveenv
 ```
 
-8. Boot the z7io
+7. Boot the z7io
 
-9. The z7io will boot as a standard ACQ400 SYSTEM with RTM2 and 2xACQ424
+8. The z7io will boot as a standard ACQ400 SYSTEM with RTM2 and 2xACQ424
 
 By default z7io will try to get a network address using dhcp.
 You should use the table SD/local/sysconfig/machosts to configure your dhcp server.
