@@ -3,7 +3,11 @@
 /usr/local/CARE/Z7IO/load.cpld_spi_overlay
 rm -f /dev/gpio/LED/FMC*
 nice /usr/local/CARE/Z7IO/z7io_init_gpio
-rm -f /dev/sites/?/*
+for s in 1 2; do
+	if [ "x$(cat /dev/gpio/fmc${s}_present)" = "x1" ]; then
+		rm -f /dev/sites/${s}/*
+	fi
+done
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" NOLOAD=1 /usr/local/CARE/Z7IO/z7io-fmc-scan
 
 
