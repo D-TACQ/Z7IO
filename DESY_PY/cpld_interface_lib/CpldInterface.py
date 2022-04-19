@@ -41,7 +41,7 @@ class CpldInterface:
         self.logger.debug("CPLD Firmware VER reg = %#x", version)
 
         assert id_reg == self.REG_ID_EXPECT, "CPLD identification register mismatch"
-        assert version == self.REG_VER_EXPECT, "CPLD version register mismatch"
+        assert version >= self.REG_VER_EXPECT, "CPLD version register mismatch"
 
     def dir_set(self, direct):
         """1 = output, 0 = input"""
