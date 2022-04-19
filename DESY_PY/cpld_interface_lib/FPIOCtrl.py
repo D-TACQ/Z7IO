@@ -192,7 +192,7 @@ class FPIOCtrl:
         Args:
             level (FPIOLevel): level
         """
-        lev_bits = [1 if lev == FPIOLevel.LEVEL_5V else 0 for lev in levels]
+        lev_bits = [1 if lev == FPIOLevel.LEVEL_3V3 else 0 for lev in levels]
         lev_val = BitArray(lev_bits[::-1]).uint
         self.cpld_if.lev_set(lev_val)
 
@@ -207,16 +207,16 @@ class FPIOCtrl:
         assert 0 <= buf_idx < self.NR_BUFS, "Buffer number in limits"
         assert isinstance(
             level, FPIOLevel
-        ), "level must be either FPIOLevel.level == FPIOLevel.LEVEL_5V: or FPIOLevel.LEVEL_5V"
+        ), "level must be either FPIOLevel.level == FPIOLevel.LEVEL_3V3: or FPIOLevel.LEVEL_5V"
 
         self.logger.debug(
             "buf_level_set_single: buf_idx = %d, level = %s", buf_idx, level
         )
 
         lev_vec = self.cpld_if.lev_get()
-        if level == FPIOLevel.LEVEL_5V:
+        if level == FPIOLevel.LEVEL_3V3:
             self.cpld_if.lev_set(lev_vec | (1 << buf_idx))
-        elif level == FPIOLevel.LEVEL_3V3:
+        elif level == FPIOLevel.LEVEL_5V:
             self.cpld_if.lev_set(lev_vec & ~(1 << buf_idx))
         else:
             raise RuntimeError("How did we get here?")
@@ -234,9 +234,9 @@ class FPIOCtrl:
         lev_vec = self.cpld_if.lev_get()
 
         if lev_vec & (1 << buf_idx):
-            return FPIOLevel.LEVEL_5V
-        else:
             return FPIOLevel.LEVEL_3V3
+        else:
+            return FPIOLevel.LEVEL_5V
 
     def buf_enable(self, ens):
         """Enable all buffers
