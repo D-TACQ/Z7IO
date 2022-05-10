@@ -1,0 +1,53 @@
+#!/bin/sh
+
+DST=${1:-nowhere}
+
+MOUNT=$(mount | grep $DST)
+if [ $? -ne 0 ]; then
+	echo ERROR: $DST not a mount point
+	exit 1
+fi
+echo $MOUNT | grep vfat
+if [ $? -ne 0 ]; then
+	echo ERROR: $DST not a vfat
+	exit 1
+fi
+LS=$(ls $DST)
+if [ $? -eq 0 ]; then
+	if [ -z "$LS" ]; then
+		echo $DST is an empty vfat mount point .. let\'s go\!
+	else
+		echo ERROR $DST is NOT empty
+		exit 1
+	fi
+fi
+
+LOCAL=$(ls -t acq400-z7io-base-SD-* | head -n1)
+echo INSTALL LOCAL $LOCAL
+tar xvzf $LOCAL -C $DST
+
+ESW=$(ls -t ../ACQ400RELEASE/REL/*.tar | head -n1)
+echo INSTALL ESW $ESW
+tar xvf $ESW -C $DST
+
+echo GUNZIP rootfs.ext2.gz
+(cd $DST; gunzip rootfs.ext2.gz)
+
+FPGA=$(ls -t ../ACQ400RELEASE/REL/*.img | head -n1)
+echo INSTALL FPGA $FPGA
+cp $FPGA $DST/ko
+
+RELT=$(basename $ESW)
+REL=${RELT%.*}
+
+echo CUSTOMIZE
+
+(cd $DST; mv packages.opt/02-custom_z7io_payload_acq424-*tgz packages)
+
+echo CREATE RELEASE tarball z7io-$REL.tgz
+tar cvzf z7io-$REL.tgz -C $DST .
+
+ls -l z7io-$REL.tgz
+
+
+
