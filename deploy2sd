@@ -33,7 +33,8 @@ tar xvf $ESW -C $DST
 echo GUNZIP rootfs.ext2.gz
 (cd $DST; gunzip rootfs.ext2.gz)
 
-FPGA=$(ls -t ../ACQ400RELEASE/REL/*.img | head -n1)
+#FPGA=$(ls -t ../ACQ400RELEASE/REL/*.img | head -n1)
+FPGA=$(ls -t ../ACQ400RELEASE/OPT/ko/z7io*.img | head -n1)
 echo INSTALL FPGA $FPGA
 cp $FPGA $DST/ko
 
