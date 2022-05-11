@@ -33,6 +33,9 @@ def main():
         "-d", "--dir", choices=["in", "out"], help="Set the MLVDS port direction"
     )
     parser.add_argument(
+        "-f", "--force", action="store_true", help="override prompts"
+    )    
+    parser.add_argument(
         "-m",
         "--mode",
         help="CPLD register or application forward",
@@ -66,16 +69,16 @@ def main():
     if args.dir == "in":
         mlvds.port_init(MLVDSDir.IN, route)
     elif args.dir == "out":
-        print("This command will enable the outputs on the MLVDS lines (port 17-20)!")
-        print(
-            "PLEASE ENSURE THAT THERE IS NO INPUT SIGNAL CONNECTED TO THESE\n"
-            "MLVDS IO LINES! OTHERWISE THIS OPERATION MIGHT RESULT IN DAMAGE\n"
-            "OF THE DAMC-FMC1Z7IO OR OTHER CARDS IN THE SYSTEM."
-        )
-        cont_yn = input("Continue? [yN] ")
-
-        if len(cont_yn) == 0 or not cont_yn[0].lower() == "y":
-            return
+        if not args.force:
+            print("This command will enable the outputs on the MLVDS lines (port 17-20)!")
+            print(
+                "PLEASE ENSURE THAT THERE IS NO INPUT SIGNAL CONNECTED TO THESE\n"
+                "MLVDS IO LINES! OTHERWISE THIS OPERATION MIGHT RESULT IN DAMAGE\n"
+                "OF THE DAMC-FMC1Z7IO OR OTHER CARDS IN THE SYSTEM."
+            )
+            cont_yn = input("Continue? [yN] ")
+            if len(cont_yn) == 0 or not cont_yn[0].lower() == "y":
+                return
 
         # reset MLVDS buffer reg to 0
         if route == MLVDSRouting.REG:
