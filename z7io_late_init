@@ -10,4 +10,6 @@ for s in 1 2; do
 done
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" NOLOAD=1 /usr/local/CARE/Z7IO/z7io-fmc-scan
 
+mkdir -p /etc/acq400/0
+ln -s /usr/local/DESY_PY/acq400_z7io_trg_sel.py /etc/acq400/0/acq400_z7io_trg_sel
 
