@@ -9,6 +9,9 @@ import time
 from cpld_interface_lib.FPIOCtrl import FPIOCtrl, FPIODir, FPIOLevel, FPIORouting
 from cpld_interface_lib.MLVDSCtrl import MLVDSCtrl, MLVDSDir, MLVDSRouting
 
+LEVEL_TRACE = logging.DEBUG - 5
+logging.addLevelName(LEVEL_TRACE, "TRACE")
+
 BUF = 0
 
 def fpio_disable(fpio):
@@ -38,7 +41,7 @@ def select_trg(fpio_ctrl, mlvds, source):
     if source == "OFF":
         fpio_disable(fpio_ctrl)
         mlvds_disable(mlvds)
-    if source == "FP":
+    elif source == "FP":
         mlvds_disable(mlvds)
         fpio_enable(fpio_ctrl)
     elif source == "RP":
@@ -75,7 +78,7 @@ def run_main():
     args = parser.parse_args()
     
     if args.trace or args.debug:
-        logging.basicConfig(level=(LEVEL_TRACE if args.trace else LEVEL_DEBUG))
+        logging.basicConfig(level=(LEVEL_TRACE if args.trace else logging.DEBUG))
     logger = logging.getLogger(__name__)
     select_trg(FPIOCtrl(), MLVDSCtrl(), args.route)
     
