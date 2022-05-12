@@ -15,13 +15,13 @@ class CpldSpiDriver:
     Z7IO_CPLD_SPI_DEV = 0
 
     def __init__(self):
+        self.logger = logging.getLogger(__name__)
+        self.logger.log(LEVEL_TRACE, "SPI_BUS {} SPI_DEV {}".format(self.Z7IO_SPI_BUS, self.Z7IO_CPLD_SPI_DEV))
 
-        self.dev = spidev.SpiDev()
-        print("SPI_BUS {} SPI_DEV {}".format(self.Z7IO_SPI_BUS, self.Z7IO_CPLD_SPI_DEV))
+        self.dev = spidev.SpiDev()       
         self.dev.open(self.Z7IO_SPI_BUS, self.Z7IO_CPLD_SPI_DEV)
         self.dev.max_speed_hz = 25000000
 
-        self.logger = logging.getLogger(__name__)
 
     def rd(self, addr: int):
         to_send = [0x80 + addr, 0x00]
