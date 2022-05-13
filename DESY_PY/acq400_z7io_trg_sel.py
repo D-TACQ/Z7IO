@@ -44,10 +44,10 @@ def select_trg(fpio_ctrl, mlvds, source):
     elif source == "FP":
         mlvds_disable(mlvds)
         fpio_enable(fpio_ctrl)
-    elif source == "RP":
+    elif source == "BP":
         fpio_disable(fpio_ctrl)
         mlvds.port_init(MLVDSDir.IN, MLVDSRouting.APP)
-    elif source == "FPM":
+    elif source == "FP2BP":
         fpio_enable(fpio_ctrl)
         for _ in range(10):
             if mlvds.port_input_get() != 0:
@@ -74,7 +74,7 @@ def run_main():
         action="store_true",
         help="Enable even more verbose output (trace level)",
     )        
-    parser.add_argument('--route', default="OFF", help="OFF,FP,RP,FPM")
+    parser.add_argument('--route', default="OFF", help="OFF,FP,BP,FP2BP")
     args = parser.parse_args()
     
     if args.trace or args.debug:
