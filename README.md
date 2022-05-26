@@ -1,3 +1,16 @@
+# build a complete turnkey SD card image:
+
+We needs a local FAT file system, the easiest thing is to plug in a local
+SD card. Do this and find the mount point.
+
+eg
+/run/media/pgm/417B-5B97
+
+build an image:
+./deploy2sd /run/media/pgm/417B-5B97
+z7io-acq400-511-20220525111647.tgz
+
+
 # customization for z7io
 
 mkenvimage -s 131072 -o uboot.env uEnv.txt

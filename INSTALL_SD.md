@@ -1,59 +1,21 @@
 To create an SD card for Z7IO
 
+
+
 1. The mac address is stored in an EEPROM on the Z7IO, this is the ONLY unique information.
 
 2. Unpack the base SD card to SD root shown here as 'SD'
 
-```
-tar xvzf acq400-z7io-base-SD-YYMMDD.tgz
-```
-
-3. Unpack the main release to SD root:
-eg release 485:
+z7io is supplied with a unique all-in-one SD card image
 
 ```
-tar xvf acq400-485-??????????????.tar 
+download eg@ https://github.com/D-TACQ/ACQ400RELEASE/releases/download/v511/z7io-acq400-511-20220525111647.tgz
+
+tar xvzf z7io-acq400-VVV-YYYYMMDD*.tgz
 ```
 
-   - change directory
-here we assume "SD" is the mount point of the SD card on your computer
 
-```
-pushd SD
-```
-
-   - copy the kernel
-
-*No longer required:*
-```
-cp uImage uImage.acq400
-```
-
-   - Unpack the rootfs
-
-```
-gunzip rootfs.ext2.gz
-```
-
-   - Install Payload customization
-
-```
-mv packages.opt/02-custom_z7io_payload_acq424-??????????.tgz packages
-```
-
-   - change back to original directory
-
-```
-popd
-```
-
-4. Copy FPGA images to set to the SD
-
-```
-cp fpga-485-??????????????.img SD/ko
-```
-
-5. Insert the SD card, connect to the z7io CONSOLE at 115200baud
+3. Insert the SD card, connect to the z7io CONSOLE at 115200baud
 
 *Disable flow control (example for kermit)*
 ```
