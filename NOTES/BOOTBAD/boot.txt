@@ -1,0 +1,562 @@
+<pre>Stopping atd: OK
+Stopping linuxptp system clock synchronization: FAIL
+Stopping ptpd2: OK
+Stopping linuxptp daemon: FAIL
+Stopping tcf-agent: OK
+Stopping sshd: OK
+Stopping nginx...
+no /usr/sbin/nginx found; none killed
+Stopping lighttpd: OK
+Stopping gpsd: Failed
+Stopping ntpd: FAIL
+Nothing to do, sntp is not a daemon.
+Stopping dhcpcd...
+no /sbin/dhcpcd found; none killed
+Stopping network: ifdown: interface lo not configured
+OK
+Stopping iptables: modprobe: can&apos;t open &apos;modules.dep&apos;: No such file or directory
+iptables v1.8.7 (legacy): can&apos;t initialize iptables table `filter&apos;: Table does not exist (do you need to insmod?)
+Perhaps iptables or your kernel needs to be upgraded.
+FAIL
+Saving random seed: OK
+Stopping klogd: FAIL
+Stopping syslogd: FAIL
+umount: ram busy - remounted read-only
+umount: /dev/loop0 busy - remounted read-only
+umount: /dev/loop0 busy - remounted read-only
+umount: /dev/loop0 busy - remounted read-only
+umount: ramfs busy - remounted read-only
+umount: /dev/mmcblk0p1 busy - remounted read-only
+umount: ramfs busy - remounted read-only
+umount: can&apos;t remount tmpfs read-only
+umount: can&apos;t remount tmpfs read-only
+umount: devpts busy - remounted read-only
+umount: devtmpfs busy - remounted read-only
+[  841.148861] EXT4-fs (ram0): re-mounted. Opts: (null)
+The system is going down NOW!
+<font color="#A347BA"><b>[2022/03/15 20:40:15:5811] N: received signal: SIGTERM (15), exiting...</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:15:5813] N: send ^C to force exit.</b></font>
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system reboot
+[  843.201557] reboot: Restarting system
+
+Xilinx First Stage Boot Loader 
+Release 2020.2	Mar 11 2022-11:42:18
+DAMC-FMC1Z7IO board support by:
+  DESY MicroTCA Technology Lab
+Devcfg driver initialized 
+Silicon Version 3.1
+Boot mode is SD
+SD: rc= 0
+SD Init Done 
+Flash Base Address: 0xE0100000
+Reboot status register: 0x60480000
+Multiboot Register: 0x0000C000
+Image Start Address: 0x00000000
+Partition Header Offset:0x00000C80
+Partition Count: 2
+Partition Number: 1
+Header Dump
+Image Word Len: 0x0002CDF9
+Data Word Len: 0x0002CDF9
+Partition Word Len:0x0002CDF9
+Load Addr: 0x04000000
+Exec Addr: 0x04000000
+Partition Start: 0x000065D0
+Partition Attr: 0x00000010
+Partition Checksum Offset: 0x00000000
+Section Count: 0x00000001
+Checksum: 0xF7F72DE3
+Application
+Handoff Address: 0x04000000
+In FsblHookBeforeHandoff function 
+SUCCESSFUL_HANDOFF
+FSBL Status = 0x1
+
+
+U-Boot 2020.01 (Mar 11 2022 - 11:40:41 +0000)
+
+CPU:   Zynq 7z030
+Silicon: v3.1
+DRAM:  ECC disabled 1 GiB
+Flash: 0 Bytes
+NAND:  0 MiB
+MMC:   mmc@e0100000: 0, mmc@e0101000: 1
+Loading Environment from SPI Flash... SF: Detected s25fl256s0 with page size 256 Bytes, erase size 256 KiB, total 32 MiB
+OK
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Net:   
+ZYNQ GEM: e000b000, mdio bus e000b000, phyaddr 0, interface rgmii-id
+zynq_board_read_rom_ethaddr: Path to EEPROM /amba/i2c@e0004000/eeprom@57
+zynq_board_read_rom_ethaddr: EEPROM with 16-bit addr used
+zynq_board_read_rom_ethaddr: I2C EEPROM MAC 80:1f:12:dc:7b:d2
+eth0: ethernet@e000b000
+Hit any key to stop autoboot:  0 
+Copying Linux from SD to RAM...
+Device: mmc@e0100000
+Manufacturer ID: 2
+OEM: 544d
+Name: SA16G 
+Bus Speed: 50000000
+Mode: SD High Speed (50MHz)
+Rd Block Len: 512
+SD version 3.0
+High Capacity: Yes
+Capacity: 14.4 GiB
+Bus Width: 4-bit
+Erase Group Size: 512 Bytes
+ERROR: reserving fdt memory region failed (addr=3c000000 size=4000000)
+3483584 bytes read in 214 ms (15.5 MiB/s)
+ERROR: reserving fdt memory region failed (addr=3c000000 size=4000000)
+18473 bytes read in 38 ms (474.6 KiB/s)
+ERROR: reserving fdt memory region failed (addr=3c000000 size=4000000)
+2987320 bytes read in 187 ms (15.2 MiB/s)
+## Booting kernel from Legacy Image at 03000000 ...
+   Image Name:   Linux-4.14.0-acq400-xilinx
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3483520 Bytes = 3.3 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+## Loading init Ramdisk from Legacy Image at 02000000 ...
+   Image Name:   D-TACQ ACQ400 INITRD
+   Image Type:   ARM Linux RAMDisk Image (gzip compressed)
+   Data Size:    2987256 Bytes = 2.8 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 02a00000
+   Booting using the fdt blob at 0x2a00000
+   Loading Kernel Image
+   Loading Ramdisk to 1fd26000, end 1ffff4f8 ... OK
+   Loading Device Tree to 1fd1e000, end 1fd25828 ... OK
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Linux version 4.14.0-acq400-xilinx (pgm@hoy5) (gcc version 7.3.1 20180314 (Linaro GCC 7.3-2018.04-rc3)) #157 SMP PREEMPT Sun Jan 23 11:49:45 GMT 2022
+[    0.000000] CPU: ARMv7 Processor [413fc090] revision 0 (ARMv7), cr=18c5387d
+[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] OF: fdt: Machine model: Xilinx Zynq
+[    0.000000] Memory policy: Data cache writealloc
+[    0.000000] cma: Reserved 16 MiB at 0x3f000000
+[    0.000000] percpu: Embedded 16 pages/cpu @ef7c9000 s34700 r8192 d22644 u65536
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 260608
+[    0.000000] Kernel command line: earlyprintk console=ttyPS0,115200 root=/dev/ram rw rootwait
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] Memory: 1010988K/1048576K available (5120K kernel code, 216K rwdata, 1332K rodata, 1024K init, 150K bss, 21204K reserved, 16384K cma-reserved, 245760K highmem)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xffc00000 - 0xfff00000   (3072 kB)
+[    0.000000]     vmalloc : 0xf0800000 - 0xff800000   ( 240 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xf0000000   ( 768 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc0600000   (6112 kB)
+[    0.000000]       .init : 0xc0800000 - 0xc0900000   (1024 kB)
+[    0.000000]       .data : 0xc0900000 - 0xc0936348   ( 217 kB)
+[    0.000000]        .bss : 0xc0936348 - 0xc095be64   ( 151 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] 	RCU restricting CPUs from NR_CPUS=4 to nr_cpu_ids=2.
+[    0.000000] 	Tasks RCU enabled.
+[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+[    0.000000] efuse mapped to f0800000
+[    0.000000] slcr mapped to f0802000
+[    0.000000] L2C: platform modifies aux control register: 0x72360000 -&gt; 0x72760000
+[    0.000000] L2C: DT/platform modifies aux control register: 0x72360000 -&gt; 0x72760000
+[    0.000000] L2C-310 erratum 769419 enabled
+[    0.000000] L2C-310 enabling early BRESP for Cortex-A9
+[    0.000000] L2C-310 full line of zeros enabled for Cortex-A9
+[    0.000000] L2C-310 ID prefetch enabled, offset 1 lines
+[    0.000000] L2C-310 dynamic clock gating enabled, standby mode enabled
+[    0.000000] L2C-310 cache controller enabled, 8 ways, 512 kB
+[    0.000000] L2C-310: CACHE_ID 0x410000c8, AUX_CTRL 0x76760001
+[    0.000000] zynq_clock_init: clkc starts at f0802100
+[    0.000000] Zynq clock init
+[    0.000011] sched_clock: 64 bits at 333MHz, resolution 3ns, wraps every 4398046511103ns
+[    0.000033] clocksource: arm_global_timer: mask: 0xffffffffffffffff max_cycles: 0x4ce07af025, max_idle_ns: 440795209040 ns
+[    0.000062] Switching to timer-based delay loop, resolution 3ns
+[    0.000165] clocksource: ttc_clocksource: mask: 0xffff max_cycles: 0xffff, max_idle_ns: 537538477 ns
+[    0.000200] timer #0 at f080a000, irq=17
+[    0.000694] Console: colour dummy device 80x30
+[    0.000721] Calibrating delay loop (skipped), value calculated using timer frequency.. 666.66 BogoMIPS (lpj=3333333)
+[    0.000739] pid_max: default: 32768 minimum: 301
+[    0.000882] Mount-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.000898] Mountpoint-cache hash table entries: 2048 (order: 1, 8192 bytes)
+[    0.001483] CPU: Testing write buffer coherency: ok
+[    0.001680] CPU0: thread -1, cpu 0, socket 0, mpidr 80000000
+[    0.040356] Setting up static identity map for 0x100000 - 0x100060
+[    0.060315] Hierarchical SRCU implementation.
+[    0.100317] smp: Bringing up secondary CPUs ...
+[    0.170661] CPU1: thread -1, cpu 1, socket 0, mpidr 80000001
+[    0.170772] smp: Brought up 1 node, 2 CPUs
+[    0.170790] SMP: Total of 2 processors activated (1333.33 BogoMIPS).
+[    0.170798] CPU: All CPU(s) started in SVC mode.
+[    0.171758] devtmpfs: initialized
+[    0.175800] random: get_random_u32 called from bucket_table_alloc+0x1c4/0x204 with crng_init=0
+[    0.175989] VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+[    0.176311] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.176332] futex hash table entries: 512 (order: 3, 32768 bytes)
+[    0.177318] pinctrl core: initialized pinctrl subsystem
+[    0.178408] NET: Registered protocol family 16
+[    0.180486] random: fast init done
+[    0.182333] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    0.191439] hw-breakpoint: found 5 (+1 reserved) breakpoint and 1 watchpoint registers.
+[    0.191455] hw-breakpoint: maximum watchpoint size is 4 bytes.
+[    0.191583] zynq-ocm f800c000.ocmc: ZYNQ OCM pool: 256 KiB @ 0xf0880000
+[    0.192014] zynq-pinctrl 700.pinctrl: zynq pinctrl initialized
+[    0.192386] e0001000.serial: ttyPS0 at MMIO 0xe0001000 (irq = 26, base_baud = 6249999) is a xuartps
+[    0.661613] console [ttyPS0] enabled
+[    0.681680] SCSI subsystem initialized
+[    0.685929] usbcore: registered new interface driver usbfs
+[    0.691493] usbcore: registered new interface driver hub
+[    0.696886] usbcore: registered new device driver usb
+[    0.702383] pps_core: LinuxPPS API ver. 1 registered
+[    0.707346] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti &lt;giometti@linux.it&gt;
+[    0.717630] PTP clock support registered
+[    0.721632] EDAC MC: Ver: 3.0.0
+[    0.731858] clocksource: Switched to clocksource arm_global_timer
+[    0.748069] NET: Registered protocol family 2
+[    0.753275] TCP established hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.760426] TCP bind hash table entries: 8192 (order: 4, 65536 bytes)
+[    0.767265] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.773730] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.779686] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.786249] NET: Registered protocol family 1
+[    0.790963] RPC: Registered named UNIX socket transport module.
+[    0.796919] RPC: Registered udp transport module.
+[    0.801609] RPC: Registered tcp transport module.
+[    0.806328] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.812965] Trying to unpack rootfs image as initramfs...
+[    0.818890] rootfs image is not initramfs (no cpio magic); looks like an initrd
+[    0.844332] Freeing initrd memory: 2920K
+[    0.848588] hw perfevents: no interrupt-affinity property for /pmu@f8891000, guessing.
+[    0.856814] hw perfevents: enabled with armv7_cortex_a9 PMU driver, 7 counters available
+[    0.866548] workingset: timestamp_bits=30 max_order=18 bucket_order=0
+[    0.873488] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.879577] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    0.887409] bounce: pool size: 64 pages
+[    0.891251] io scheduler noop registered
+[    0.895193] io scheduler deadline registered
+[    0.899499] io scheduler cfq registered (default)
+[    0.904305] io scheduler mq-deadline registered
+[    0.908825] io scheduler kyber registered
+[    0.922230] brd: module loaded
+[    0.932464] loop: module loaded
+[    0.938346] m25p80 spi0.0: found s25fl256s0, expected n25q128a11
+[    1.049249] m25p80 spi0.0: s25fl256s0 (65536 Kbytes)
+[    1.054269] 5 ofpart partitions found on MTD device spi0.0
+[    1.059744] Creating 5 MTD partitions on &quot;spi0.0&quot;:
+[    1.064550] 0x000000000000-0x000000100000 : &quot;qspi-fsbl-uboot&quot;
+[    1.071260] 0x000000100000-0x000000600000 : &quot;qspi-linux&quot;
+[    1.077448] 0x000000600000-0x000000620000 : &quot;qspi-device-tree&quot;
+[    1.083309] mtd: partition &quot;qspi-device-tree&quot; doesn&apos;t end on an erase/write block -- force read-only
+[    1.093322] 0x000000620000-0x000000c00000 : &quot;qspi-rootfs&quot;
+[    1.098719] mtd: partition &quot;qspi-rootfs&quot; doesn&apos;t start on an erase/write block boundary -- force read-only
+[    1.109273] 0x000000c00000-0x000001000000 : &quot;qspi-bitstream&quot;
+[    1.116254] libphy: Fixed MDIO Bus: probed
+[    1.122823] libphy: MACB_mii_bus: probed
+[    1.222063] macb e000b000.ethernet eth0: Cadence GEM/MAC: TechLab: patch for FIBRE (88E1512)
+[    1.230507] macb e000b000.ethernet eth0: Cadence GEM rev 0x00020118 at 0xe000b000 irq 29 (80:1f:12:dc:7b:d2)
+[    1.240370] Marvell 88E1510 e000b000.ethernet-ffffffff:00: attached PHY driver [Marvell 88E1510] (mii_bus:phy_addr=e000b000.ethernet-ffffffff:00, irq=POLL)
+[    1.255558] ehci_hcd: USB 2.0 &apos;Enhanced&apos; Host Controller (EHCI) Driver
+[    1.262200] usbcore: registered new interface driver usb-storage
+[    1.269739] i2c /dev entries driver
+[    1.279441] pca953x 0-0020: interrupt support not compiled in
+[    1.286109] at24 0-0057: 32768 byte 24c256 EEPROM, writable, 64 bytes/write
+[    1.293151] cdns-i2c e0004000.i2c: 100 kHz mmio e0004000 irq 23
+[    1.300245] cdns-wdt f8005000.watchdog: Xilinx Watchdog Timer at f0988000 with timeout 20s
+[    1.308862] EDAC MC: ECC not enabled
+[    1.312819] sdhci: Secure Digital Host Controller Interface driver
+[    1.318988] sdhci: Copyright(c) Pierre Ossman
+[    1.323359] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.381909] mmc0: SDHCI controller on e0100000.mmc [e0100000.mmc] using ADMA
+[    1.390438] ledtrig-cpu: registered to indicate activity on CPUs
+[    1.398845] usbcore: registered new interface driver usbhid
+[    1.404480] usbhid: USB HID core driver
+[    1.412573] NET: Registered protocol family 10
+[    1.418017] Segment Routing with IPv6
+[    1.421753] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    1.428414] NET: Registered protocol family 17
+[    1.433204] Registering SWP/SWPB emulation handler
+[    1.442676] hctosys: unable to open rtc device (rtc0)
+[    1.447723] of_cfs_init
+[    1.450226] of_cfs_init: OK
+[    1.450801] mmc0: new high speed SDHC card at address 1234
+[    1.451261] mmcblk0: mmc0:1234 SA16G 14.4 GiB 
+[    1.452592]  mmcblk0: p1
+[    1.466094] RAMDISK: gzip image found at block 0
+[    1.867896] EXT4-fs (ram0): couldn&apos;t mount as ext3 due to feature incompatibilities
+[    1.876623] EXT4-fs (ram0): mounted filesystem without journal. Opts: (null)
+[    1.883744] VFS: Mounted root (ext4 filesystem) on device 1:0.
+[    1.889711] devtmpfs: mounted
+[    1.895499] Freeing unused kernel memory: 1024K
+[    1.954267] FAT-fs (mmcblk0p1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Starting rcS...
+++ Mounting filesystem
+++ Mounting main fs
+skip local
+++ Setting up mdev
+++ Setting hostname
++++ setting hn z7io_011 from macaddr 80:1f:12:dc:7b:d2
+++ Start Lo
+++ Setting EPOCH 2000 in case there is no NTP later
+Sat Jan  1 00:00:00 UTC 2000
+++ Networking .. assigning serial console, use CTRL-C to break
+[    2.630081] IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+eth0 Waiting for link up ... 6
+eth0 Waiting for link up ... 5
+[    3.742104] macb e000b000.ethernet eth0: link up (1000/Full)
+[    3.747776] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+eth0 ethernet link up
++++ Starting dhcp daemon [default]
+udhcpc: started, v1.34.1
+udhcpc: broadcasting discover
+udhcpc: broadcasting select for 10.12.196.199, server 10.12.196.15
+udhcpc: lease of 10.12.196.199 obtained from 10.12.196.15, lease time 86400
+deleting routers
+route: SIOCDELRT: No such process
+adding dns 10.12.196.15
++++ dhcp good, remove failsafe 727
+udhcpc: started, v1.34.1
+udhcpc: broadcasting discover
+udhcpc: broadcasting select for 10.12.196.199, server 10.12.196.15
+udhcpc: lease of 10.12.196.199 obtained from 10.12.196.15, lease time 86400
+deleting routers
+route: SIOCDELRT: No such process
+adding dns 10.12.196.15
+++ locate kernel modules
+PACKAGE KO /mnt/ko/packageko-4.14.0-acq400-xilinx-220314172329.img exists, mount it
++++ bind legacy modules dir /usr/local/lib/modules
+++ Starting http daemon
+httpd: applet not found
+++ Starting ssh daemon
+++ Loading packages from /mnt/packages
+++ Loading Package 03-acq400_common-220310195543.tgz
+acq400_common.init
+[    8.917602] xdevcfg f8007000.devcfg: ioremap 0xf8007000 to f09bb000
+++ Loading Package 04-custom_pmod-1901211015.tgz
++++ custom_pmod.init 01
++++ custom_pmod.init SITE:1 FRU /mnt/local/CUSTOM_PMOD_1_E42410999.fru
++++ custom_pmod.init SITE:2 FRU /mnt/local/CUSTOM_PMOD_2_E42410999.fru
++++ custom_pmod.init 99
++++ model z7io load support
+++ Loading Package 05-z7io-220315203948.tgz
++++ fmc-scan using /mnt/local/fmc-scan.conf
++++ mounted fpga stock /mnt/ko/fpga-483-20220314172344.img at /mnt/fpga.d
+++ decode FRU EEPROM site 1 OK
+++ decode FRU EEPROM site 2 OK
+is_identical myspec Z7IO_TOP_04_04 filespec Z7IO_TOP_04_04_32B
+WARNING:Z7IO 04 04: Z7IO 04 04 32B is compatible but has extra stuff, so not identical
+is_compatible myspec Z7IO_TOP_04_04 filespec Z7IO_TOP_04_04_32B
++++ compatible bitfile Z7IO_TOP_04_04_32B
++++ Internal name consistency check
+is_compatible myspec Z7IO_TOP_04_04 filespec Z7IO_TOP_04_04_32B
++++ compatible bitfile Z7IO_TOP_04_04_32B
+load FPGA /mnt/Z7IO_TOP_04_04_32B.bit.gz
+/usr/bin/set.sys: line 6: can&apos;t create /dev/gpio/LED/FMC1_G: nonexistent directory
+/usr/bin/set.sys: line 6: can&apos;t create /dev/gpio/LED/FMC2_G: nonexistent directory
+++ Sites populated: 2 ALL GOOD
+ls: /mnt/fpga.d/Z7IO_TOP_04_04_32B.bit.gz: No such file or directory
+++ Loading Package 10-acq420-220314172329.tgz
+acq420.init B1010
+changing loglevel to debug
+source /mnt/local/sysconfig/acq400.sh
+[   11.495557] dma-pl330 f8003000.dmac: pl330 driver hacked by PGM 1203
+[   11.505808] dma-pl330 f8003000.dmac: mcode_cpu:0xf0f9c000 bus:0x3f043000 c:8 sz:512 totsize:4096
+[   11.515818] dma-pl330 f8003000.dmac: Loaded driver for PL330 DMAC-2364208
+[   11.544382] dma-pl330 f8003000.dmac: 	DBUFF-128x8bytes Num_Chans-8 Num_Peri-4 Num_Events-16
+for debug:
+echo file acq400_drv.c +p &gt; /sys/kernel/debug/dynamic_debug/control
+echo file acq400_sysfs.c +p &gt; /sys/kernel/debug/dynamic_debug/control
+# ACQ424 DETECTED set VRANGE HI
+VAP=13
+VAN=-13
+insmod /lib/modules/4.14.0-acq400-xilinx/acq420fmc.ko bufferlen=1048576 nbuffers=512 good_sites=1,2
+[   11.873649] D-TACQ ACQ400 FMC Driver 3.674
+[   11.878031] acq420 40000000.acq2006sc: site:0 GOOD
+[   11.883629] acq420 40000000.acq2006sc: request_mem_region(40000000 10000 acq400.0)
+[   11.891986] acq420 40000000.acq2006sc: acq400: site_no:0 dev_name:acq400.0 mapped 0x40000000 to 0xf1020000
+[   11.901662] acq420 40000000.acq2006sc: About to read MODID from f1020000
+[   11.908405] acq420 40000000.acq2006sc: Device MODID 8412051d
+[   11.914196] acq420 40000000.acq2006sc: acq400_modprobe id 84 SC
+[   11.920137] acq420 40000000.acq2006sc: allocate_hbm() nb:512 bl:0x00100000
+[   13.683091] acq420 40000000.acq2006sc: setting nbuffers 512
+[   13.688822] acq420 40000000.acq2006sc: setting nbuffers 512
+[   13.694428] acq420 40000000.acq2006sc: gpg:ed9014d0 base:f102f000 buffer:ef077000 cursor:0
+[   13.702727] acq420 40000000.acq2006sc: acq400_createSysfs()
+[   13.709095] acq420 40000000.acq2006sc: dev_rc_finalize site:0 max:128 last:91 map:00000000 00000000 0f0f0f0f 00000000 T
+[   13.720002] acq420 40000000.acq2006sc: dev_rc_finalize site:0 max:128 last:8 map:00000106 00000000 00000000 00000000 
+[   13.730908] acq420 40010000.acq400fmc: site:1 GOOD
+[   13.735749] acq420 40010000.acq400fmc: request_mem_region(40010000 10000 acq400.1)
+[   13.743418] acq420 40010000.acq400fmc: acq400: site_no:1 dev_name:acq400.1 mapped 0x40010000 to 0xf1040000
+[   13.753126] acq420 40010000.acq400fmc: About to read MODID from f1040000
+[   13.759839] acq420 40010000.acq400fmc: Device MODID 0400081c
+[   13.765530] acq420 40010000.acq400fmc: acq400_modprobe id 4 MODULE
+[   13.771780] acq420 40010000.acq400fmc: acq400_mod_init_irq 47
+[   13.777608] acq420 40010000.acq400fmc: ACQ420 device init
+[   13.783046] acq420 40010000.acq400fmc: acq400_createSysfs()
+[   13.789028] acq420 40010000.acq400fmc: dev_rc_finalize site:1 max:128 last:9 map:00000380 00000000 00000000 00000000 T
+[   13.799786] acq420 40010000.acq400fmc: dev_rc_finalize site:1 max:128 last:3 map:0000000e 00000000 00000000 00000000 
+[   13.810687] acq420 40020000.acq400fmc: site:2 GOOD
+[   13.815564] acq420 40020000.acq400fmc: request_mem_region(40020000 10000 acq400.2)
+[   13.823239] acq420 40020000.acq400fmc: acq400: site_no:2 dev_name:acq400.2 mapped 0x40020000 to 0xf1060000
+[   13.832940] acq420 40020000.acq400fmc: About to read MODID from f1060000
+[   13.839658] acq420 40020000.acq400fmc: Device MODID 0480001c
+[   13.845345] acq420 40020000.acq400fmc: acq400_modprobe id 4 MODULE
+[   13.851656] acq420 40020000.acq400fmc: acq400_mod_init_irq 48
+[   13.857544] acq420 40020000.acq400fmc: ACQ420 device init
+[   13.862985] acq420 40020000.acq400fmc: acq400_createSysfs()
+[   13.868960] acq420 40020000.acq400fmc: dev_rc_finalize site:2 max:128 last:9 map:00000380 00000000 00000000 00000000 T
+[   13.879715] acq420 40020000.acq400fmc: dev_rc_finalize site:2 max:128 last:3 map:0000000e 00000000 00000000 00000000 
+[   13.890616] acq420 40030000.acq400fmc: warning: site 3 NOT GOOD
++++ build_site0 model z7io
+[   14.429294] pca953x 2-0021: interrupt support not compiled in
+[   14.450624] ad7418 2-0028: ad7417 chip found
+[   14.463468] ad7418 2-0028: configuring for mode 1
+[   14.473182] ad7418 2-0029: ad7417 chip found
+[   14.487413] ad7418 2-0029: configuring for mode 1
+[   14.502168] i2c i2c-1: Added multiplexed i2c bus 2
+[   14.523151] at24 3-0051: 8192 byte 24c64 EEPROM, writable, 1 bytes/write
+[   14.537382] ad7418 3-0029: ad7417 chip found
+[   14.553810] ad7418 3-0029: configuring for mode 1
+[   14.562353] i2c i2c-1: Added multiplexed i2c bus 3
+[   14.576987] at24 4-0052: 8192 byte 24c64 EEPROM, writable, 1 bytes/write
+[   14.597911] ad7418 4-002a: ad7417 chip found
+[   14.616877] ad7418 4-002a: configuring for mode 1
+[   14.622832] i2c i2c-1: Added multiplexed i2c bus 4
+[   14.632359] i2c i2c-1: Added multiplexed i2c bus 5
+[   14.647780] i2c i2c-1: Added multiplexed i2c bus 6
+[   14.659026] i2c i2c-1: Added multiplexed i2c bus 7
+[   14.665544] i2c i2c-1: Added multiplexed i2c bus 8
+[   14.677809] i2c i2c-1: Added multiplexed i2c bus 9
+[   14.695468] pca954x 1-0073: registered 8 multiplexed busses for I2C switch pca9548
+[   14.705173] cdns-i2c e0005000.i2c: 100 kHz mmio e0005000 irq 53
+[   14.763176] spidev spi3.0: buggy DT: spidev listed directly in DT
+++ acq400_init_gpio_common end 01
+++ lamp test 01
+++ lamp test 99
+++ leds all clear now 
+++ acq400_init_gpio_common end 99
+++ enable RTM power
+++ z7io_init_gpio done
++++ fmc-scan using /mnt/local/fmc-scan.conf
+++ decode FRU EEPROM site 1 OK
+[   17.871614] random: crng init done
+++ decode FRU EEPROM site 2 OK
+++ Sites populated: 2 ALL GOOD
+Calibration default installed site:1 /usr/local/cal/ACQ424ELF-defcal.xml
+build_knobs_device site:1 mtype:4
+set clkdiv 200 get.sys /dev/acq400.1.knobs/clkdiv 200
+Calibration default installed site:2 /usr/local/cal/ACQ424ELF-defcal.xml
+build_knobs_device site:2 mtype:4
+set clkdiv 200 get.sys /dev/acq400.2.knobs/clkdiv 200
++++ build nodes site 2
++++ build nodes site 1
++++ build nodes site 0
+[   25.716687] xilinx-acq400-dma 801f0000.axidma: axi-dma-s2mm-channel offset regs _00000030
+[   25.725365] xilinx-acq400-dma 801f0000.axidma: Probing xilinx axi dma engine...Successful
+[   25.733738] xilinx-acq400-dma 801e0000.axidma: device_id not instantiated, limit 1 already reached
+[   25.742854] xilinx-acq400-dma: probe of 801e0000.axidma failed with error -1
+[   25.750957] acq420 40000000.acq2006sc: init_axi_dma() 01 AXI64 init now
+[   25.757644] acq420 40000000.acq2006sc: init_axi_dma() 10
+[   25.762973] acq420 40000000.acq2006sc: .. not enough buffers limit to 510
+[   25.769758] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.775462] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.781116] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.786807] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.792482] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.798191] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.803858] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.809508] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.815183] acq420 40000000.acq2006sc: filter_axi: xilinx-acq400-dma
+[   25.821547] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.827216] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.832893] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.838543] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.844212] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.849861] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.855527] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.861180] acq420 40000000.acq2006sc: filter_axi: dma-pl330
+[   25.866847] acq420 40000000.acq2006sc: axi_dma not using standard driver using channels A x
+[   25.875265] acq420 40000000.acq2006sc: __axi64_init_procfs() acw:ed9a8600
+[   25.882075] acq420 40000000.acq2006sc: __axi64_init_procfs() acw:ed9a88c0
+[   25.888859] acq420 40000000.acq2006sc: init_axi_dma() 99
+++ Enable counter monitors
+++ Enable analog power..
+/usr/local/bin/procServ -p /var/run/knobs0.pid --restrict -q 4820 /usr/local/bin/acq400_knobs -s 0
+/usr/local/bin/procServ -p /var/run/knobs1.pid --restrict -q 4821 /usr/local/bin/acq400_knobs -s 1
+/usr/local/bin/procServ -p /var/run/knobs2.pid --restrict -q 4822 /usr/local/bin/acq400_knobs -s 2
+0: waiting for /var/run/acq400_knobs.0.pid
+ls: /etc/acq400/0/sync_out_cable_det: No such file or directory
+++ Loading Package 20-httpd-2108081011.tgz
+[   26.929056] emlog:emlog_init: version 0.70 running, major is 242, MINOR is 1, max size 1024 K.
+Log device /var/log/nginx/acq400.access.log created with buffer size of 8 KiB
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7604] N: ttyd 1.6.3 (libwebsockets 4.0.22)</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7606] N: tty configuration:</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7607] N:   start command: nc localhost 2235</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7607] N:   close signal: SIGHUP (1)</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7607] N:   terminal type: xterm-256color</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7613] N:  Using foreign event loop...</b></font>
+<font color="#A347BA"><b>[2022/03/15 20:40:51:7616] N:  Listening on port: 8235</b></font>
+killall: httpd: no process killed
+++ Loading Package 30-ai_monitor-1901051908.tgz
+/usr/local/bin/procServ: spawning daemon process: 3001
+++ Loading Package 33-libute-190104121044.tgz
+++ Loading Package 39-transient-2202220937.tgz
+++ transient runs at 39 BEFORE ioc to use knobs restart
+[   31.032381] acq420 40000000.acq2006sc: a400fs_add_site() 01 site:0 sb:eeaf0800
+[   31.039610] acq420 40010000.acq400fmc: a400fs_add_site() 01 site:1 sb:eeaf0800
+[   31.047118] acq420 40020000.acq400fmc: a400fs_add_site() 01 site:2 sb:eeaf0800
+
+sitelist: 1,2
+sites: 1 2
+site:1 d32: ncc:32 d32c:0 d16c:32 AGIX=0
+site:2 d32: ncc:64 d32c:0 d16c:64 AGIX=32
+get_site_total_size D32:0 NCHAN:64 d32c:0 d16c:64 SSB:128
+setting NCHAN:64 data32:0
+/usr/local/bin/procServ: spawning daemon process: 3053
++++ transient set /dev/acq400/data/.control COOKED=0 NSAMPLES=50000 NCHAN=64 TYPE=SHORT
+Log device /var/log/run.transient.log created with buffer size of 8 KiB
+/usr/local/bin/procServ: spawning daemon process: 3085
+++ Loading Package 40-acq400ioc-2203101013.tgz
+Log device /var/log/epics.log created with buffer size of 8 KiB
+++ create EPICS db /tmp/st.cmd
+ifconfig: eth1: error fetching interface information: Device not found
+load.records:load_mb
+load.records:load_mb_sites /dev/acq400.0.knobs 2 z7io
+load.records: control COOKED=0 NSAMPLES=50000 NCHAN=64 TYPE=SHORT
+load.records: make_AI_TR ssb:128 NSAMPLES:50000
+++ make-ch-server 1,2
+load.records:load_mb 99
+load.records 99
+/usr/local/bin/procServ: spawning daemon process: 3939
++++ make_epics_knobs
+/usr/local/bin/procServ -p /var/run/knobs0.pid --restrict -q 4820 /usr/local/bin/acq400_knobs -s 0
+/usr/local/bin/procServ -p /var/run/knobs1.pid --restrict -q 4821 /usr/local/bin/acq400_knobs -s 1
+/usr/local/bin/procServ -p /var/run/knobs2.pid --restrict -q 4822 /usr/local/bin/acq400_knobs -s 2
+0: waiting for /var/run/acq400_knobs.0.pid
+10: waiting for /var/run/acq400_knobs.0.pid
+20: waiting for /var/run/acq400_knobs.0.pid
+/usr/local/bin/procServ: spawning daemon process: 5433
+++ calling /mnt/local/rc.user
++++ /etc/init.d/rc.user .. deferring /mnt/local/rc.user
+++ rcS complete z7io_011 20:41:05 up 0 min, load average: 1.79, 0.41, 0.13
+
+Welcome to ACQ400
+z7io_011 login: Channel connect timed out: &apos;z7io_011:IOC_READY&apos; not found.
+UPTIME 51.83 z7io_011:IOC_READY all good now 1
++++ calling /mnt/local/rc.user
+/mnt/local/rc.user
++++ /mnt/local/rc.user complete
+
+Welcome to ACQ400
+z7io_011 login: 
+</pre>
+

@@ -1,0 +1,36 @@
+D-TACQ:
+000000a0  c0 02 06 4b ed 5a 31 00  16 00 14 c0 82 05 44 75  |...K.Z1.......Du|
+000000b0  5a 31 00 30 01 00 00 00                           |Z1.0....|
+
+DESY
+000000a0  c0 02 06 4b ed 5a 31 00  16 00 14 c0 82 0a 3d 77  |...K.Z1.......=w|
+000000b0  5a 31 00 30 00 05 01 01  01 00                    |Z1.0......|
+
+TEWS defines the Z3 IC record as record c0. 
+We see this at offset 0xa0 (160) and 0xbc (188)
+
+Going with bc
+D-TACQ c0 82 05 44 75 5a 31 00 30 01 00 00 00
+DESY   c0 82 0a 3d 77 5a 31 00 30 00 05 01 01 01 00
+       00 01 02 03 04 05 06 07 08 09 10 11 12 13 14
+
+[00] : c0 : OEM Record
+[01] : 82: End of List, Format 2
+[02] : 05 : D-TACQ : 5 long
+       0a : DESY   : 10 bytes  (starting from where?)
+[03] : 44/3d : CKS
+[04] : CKS
+
+[05] : OK, len starts here! 
+[05] : 5a MFG
+[06] : 31 MFG
+[07] : 00 PICMG says so
+[08] : 30 PICMG says so 
+[09] : D-TACQ: V1, DESY: V0
+[10] : 10 OEM indent
+[11] : 01 IANA
+[12] : 01 IANA
+[13] : 01 IANA
+[14] : 00 OEM Designator
+ 
+

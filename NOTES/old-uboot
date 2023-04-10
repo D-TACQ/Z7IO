@@ -1,0 +1,28 @@
+ilinx First Stage Boot Loader 
+Release 2020.2	Jul 22 2021-14:25:18
+DAMC-FMC1Z7IO board support by:
+  DESY MicroTCA Technology Lab
+Silicon Version 3.1
+Boot mode is SD
+SUCCESSFUL_HANDOFF
+FSBL Status = 0x1
+
+
+U-Boot 2020.01 (Jul 22 2021 - 14:24:51 +0000)
+
+CPU:   Zynq 7z030
+Silicon: v3.1
+DRAM:  ECC disabled 1 GiB
+Flash: 0 Bytes
+NAND:  0 MiB
+MMC:   mmc@e0100000: 0, mmc@e0101000: 1
+Loading Environment from FAT... OK
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Net:   
+ZYNQ GEM: e000b000, mdio bus e000b000, phyaddr 0, interface rgmii-id
+Could not get PHY for eth0: addr 0
+No ethernet found.
+
+
