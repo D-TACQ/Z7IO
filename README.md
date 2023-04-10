@@ -19,9 +19,8 @@ acq400-z7io-base-SD-DATE.tgz \         # base SD image
   => deploy2sd => z7io-acq400-VER-DATE.tgz  # complete SD image, replicate this
 ```
 
-## Inputs
- - local files for Base SD
- - 
+FINALLY, update a fresh Z7IO, follow INSTALL.md
+
 Base SD card acq400-z7io-base-SD-DATE.tgz is
 
  - boot .bin: copy from DESY release (not used, as it's already in QSPI FLASH)
