@@ -16,6 +16,15 @@ if [ $? -eq 0 ]; then
 	fi
 fi
 
+
+judgement() {
+# short trace length, rapid update 50Hz possible
+export SIZE=120
 export IOC_PREINIT=./scripts/load.judgement
+export acq400_Judgement_FIRST_SAM=1
+export acq400JudgementImpl_VERBOSE=0
+export acq400JudgementImpl_CBCUTOFF=999
+}
+judgement
 
 
