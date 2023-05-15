@@ -37,10 +37,9 @@ tar xvf $ESW -C $DST
 echo GUNZIP rootfs.ext2.gz
 (cd $DST; gunzip rootfs.ext2.gz)
 
-#FPGA=$(ls -t ../ACQ400RELEASE/REL/*.img | head -n1)
-FPGA=$(ls -t ../ACQ400RELEASE/OPT/ko/z7io*.img | head -n1)
+FPGA=$(ls -t ../ACQ400RELEASE/REL/z7io*.img ../ACQ400RELEASE/OPT/ko/z7io*.img | head -n1)
 if [ ! -e $FPGA ]; then
-	echo ERROR: ../ACQ400RELEASE/OPT/ko/z7io\*.img not found
+	echo 'ERROR: ../ACQ400RELEASE/*/z7io*.img not found'
 	exit 1
 fi
 echo INSTALL FPGA $FPGA
