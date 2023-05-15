@@ -4,7 +4,7 @@ DST=${1:-$PWD/fat1}
 
 if [ "x$DST" = "x$PWD/fat1" ]; then
 	echo build own FAT image testfat.img
-	./make-fake-sd
+	nice ./make-fake-sd
 fi
 MOUNT=$(mount | grep $DST)
 if [ $? -ne 0 ]; then
