@@ -1,0 +1,36 @@
+#!/usr/bin/env expect
+
+spawn fdisk testfat.img
+set PP "run-fdisk OK>"
+
+expect -re "Command .*:" { puts $PP }
+send "o\r";
+
+expect -re "Command .*:" { puts $PP }
+send "n\r"
+
+expect -re "Select .*:"  { puts $PP }
+send "p\r"
+
+expect -re "Partition .*:" { puts $PP }
+send "1\r"
+
+expect -re "First .*:" { puts $PP }
+send "\r"
+
+expect -re "Last .*:" { puts $PP }
+send "\r"
+
+expect -re "Command .*" { puts $PP }
+send "t\r"
+
+expect -re "Hex .*:" { puts $PP }
+send "c\r"
+
+expect -re "Command .*:" { puts $PP }
+send "p\r"
+
+expect -re "Command .*:" { puts $PP }
+send "w\r"
+
+

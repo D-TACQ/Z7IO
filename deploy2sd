@@ -1,7 +1,11 @@
 #!/bin/sh
 
-DST=${1:-nowhere}
+DST=${1:-$PWD/fat1}
 
+if [ "x$DST" = "x$PWD/fat1" ]; then
+	echo build own FAT image testfat.img
+	./make-fake-sd
+fi
 MOUNT=$(mount | grep $DST)
 if [ $? -ne 0 ]; then
 	echo ERROR: $DST not a mount point
@@ -54,5 +58,8 @@ tar cvzf z7io-$REL.tgz -C $DST .
 
 ls -l z7io-$REL.tgz
 
-
+if [ "x$DST" = "x$DST/fat1" ]; then
+	echo unmounting fat1
+	unmount $DST/fat1
+fi
 

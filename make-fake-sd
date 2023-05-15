@@ -1,0 +1,11 @@
+#!/bin/sh
+# rather than plug in a physical SD card, we can fake one!
+
+echo creating a 16GB fake SD image..
+[ -e testfat.img ] || dd if=/dev/zero of=testfat.img bs=1M count=16384 status=progress
+./run-fdisk testfat.img
+mkfs.vfat testfat.img
+mkdir -p fat1
+sudo mount -o uid=$(id -u $USER),gid=$(id -g $USER) testfat.img fat1
+
+
