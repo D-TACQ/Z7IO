@@ -2,6 +2,16 @@
 
 DST=${1:-$PWD/fat1}
 
+if [ -e ../ACQ400RELEASE.M ]; then
+	A4R=../ACQ400RELEASE.M
+elif [ -e ../ACQ400RELEASE ] ;then
+	A4R=../ACQ400RELEASE
+else
+	echo ERROR ../ACQ400RELEASE not found, abort
+	exit 1
+fi
+echo using A4R: $A4R
+
 if [ "x$DST" = "x$PWD/fat1" ]; then
 	echo build own FAT image testfat.img
 	nice ./make-fake-sd
@@ -22,24 +32,24 @@ if [ $? -eq 0 ]; then
 		echo $DST is an empty vfat mount point .. let\'s go\!
 	else
 		echo ERROR $DST is NOT empty
+		echo try 'rm -Rf '$DST'/*'
 		exit 1
 	fi
 fi
 
-LOCAL=$(ls -t acq400-z7io-base-SD-* | head -n1)
 echo INSTALL LOCAL $LOCAL
-tar xvzf $LOCAL -C $DST
+cp -a SD/* $DST
 
-ESW=$(ls -t ../ACQ400RELEASE/REL/*.tar | head -n1)
+ESW=$(ls -t ${A4R}/REL/*.tar | head -n1)
 echo INSTALL ESW $ESW
 tar xvf $ESW -C $DST
 
 echo GUNZIP rootfs.ext2.gz
 (cd $DST; gunzip rootfs.ext2.gz)
 
-FPGA=$(ls -t ../ACQ400RELEASE/REL/z7io*.img ../ACQ400RELEASE/OPT/ko/z7io*.img | head -n1)
+FPGA=$(ls -t ${A4R}/REL/z7io*.img ${A4R}/OPT/ko/z7io*.img | head -n1)
 if [ ! -e $FPGA ]; then
-	echo 'ERROR: ../ACQ400RELEASE/*/z7io*.img not found'
+	echo 'ERROR: ${A4R}/*/z7io*.img not found'
 	exit 1
 fi
 echo INSTALL FPGA $FPGA

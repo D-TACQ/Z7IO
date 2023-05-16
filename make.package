@@ -10,9 +10,6 @@ TOP=..
 
 echo mkenvimage -s 131072 -o uboot.env uEnv.txt
 
-cp machosts SD/local/sysconfig/
-tar cvzf acq400-z7io-base-SD-${DC}.tgz -C SD .
-
 rm -Rf opkg/*
 mkdir -p opkg/usr/local/bin \
 	opkg/usr/local/init opkg/usr/local/lib/modules \
