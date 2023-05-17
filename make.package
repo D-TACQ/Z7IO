@@ -17,7 +17,7 @@ mkdir -p opkg/usr/local/bin \
 	opkg/usr/local/CARE/${BIGMODEL} \
 	release
 
-cp machosts ${MODEL}_init_gpio load.cpld_spi_overlay z7io-fmc-scan opkg/usr/local/CARE/${BIGMODEL}
+cp ${MODEL}_init_gpio load.cpld_spi_overlay z7io-fmc-scan opkg/usr/local/CARE/${BIGMODEL}
 cp ${MODEL}.map   opkg/usr/local/
 cp ${MODEL}.init ${MODEL}_late_init opkg/usr/local/init
 cp -a DESY_PY  opkg/usr/local
