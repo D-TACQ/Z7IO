@@ -24,6 +24,8 @@ export IOC_PREINIT=./scripts/load.judgement
 export acq400_Judgement_FIRST_SAM=1
 export acq400JudgementImpl_VERBOSE=0
 export acq400JudgementImpl_CBCUTOFF=999
+# temporary hack to avoid segfault processing multiple callbacks
+export acq400JudgementImpl_CBCUTOFF=1
 }
 judgement
 
