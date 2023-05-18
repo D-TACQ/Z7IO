@@ -27,6 +27,16 @@ export acq400JudgementImpl_CBCUTOFF=999
 # temporary hack to avoid segfault processing multiple callbacks
 export acq400JudgementImpl_CBCUTOFF=1
 }
-judgement
+#judgement
+
+
+burst_mode_live_scope() {
+# old way
+export SIZE=1024
+echo >> /etc/sysconfig/acq400.conf "export StreamHead_LDI_SOURCE=%s.bq"
+echo "STREAM_OPTS=" >> /etc/sysconfig/acq400_streamd.conf
+}
+
+burst_mode_live_scope
 
 
