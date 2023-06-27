@@ -22,12 +22,11 @@ judgement() {
 export SIZE=120
 export IOC_PREINIT=./scripts/load.judgement
 export acq400_Judgement_FIRST_SAM=1
-export acq400JudgementImpl_VERBOSE=0
-export acq400JudgementImpl_CBCUTOFF=999
-# temporary hack to avoid segfault processing multiple callbacks
-export acq400JudgementImpl_CBCUTOFF=1
+export BURSTS_PER_BUFFER=2
+export RTM_BUFFER_MON=y
+export RTM_BUFFER_MON_VERBOSE=1
 }
-#judgement
+judgement
 
 
 burst_mode_live_scope() {
@@ -37,6 +36,6 @@ echo >> /etc/sysconfig/acq400.conf "export StreamHead_LDI_SOURCE=%s.bq"
 echo "STREAM_OPTS=" >> /etc/sysconfig/acq400_streamd.conf
 }
 
-burst_mode_live_scope
+#burst_mode_live_scope
 
 
