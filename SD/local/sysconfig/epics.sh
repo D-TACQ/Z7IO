@@ -19,7 +19,7 @@ fi
 
 judgement() {
 # short trace length, rapid update 50Hz possible
-export SIZE=120
+export SIZE=128
 export IOC_PREINIT=./scripts/load.judgement
 export acq400_Judgement_FIRST_SAM=1
 export BURSTS_PER_BUFFER=2
