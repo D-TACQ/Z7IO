@@ -1,0 +1,17 @@
+#!/bin/sh
+# creates machosts entry from test sheet
+# eg
+# ./z7io_get_mac CM4030103.odt
+# 80:34:28:8b:92:a9 z7io_103 CM4030103
+
+get_mac() {
+	file=$1
+	mac=$(odt2txt CM4030103.odt  | grep 'MAC Address:' | awk '{ print $3 }')
+	sn=${file%*.odt}
+	hn=z7io_${sn:6:8}
+	echo $mac $hn $sn
+}
+
+for file in $*; do
+	get_mac $file
+done
