@@ -9,17 +9,17 @@ HN=$(hostname)
 echo $HN > /etc/acq400/0/HN
 echo $HN > /etc/acq400/0/dtsn
 
-PS1="breakme>" /bin/sh
+# PS1="breakme>" /bin/sh
 
 gunzip < /usr/local/CARE/Z7IO/Z7IO_TOP_BARE.bit.gz | xiloader -L
-PS1="breakme2>" /bin/sh
+# PS1="breakme2>" /bin/sh
 
 /usr/local/CARE/Z7IO/load.rtmi2c_overlay
 /usr/local/CARE/Z7IO/z7io_init_gpio
-PS1="breakme3>" /bin/sh
+# PS1="breakme3>" /bin/sh
 
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" SITE2BUS=2 /usr/local/bin/fmc-scan
-PS1="breakme4>" /bin/sh
+# PS1="breakme4>" /bin/sh
 
 
 
