@@ -1,0 +1,8 @@
+CFG=/sys/kernel/config
+mount | grep -q $CFG
+[ $? -eq 0 ] || mount -t configfs none $CFG
+
+OVL=$CFG/device-tree/overlays/rtmi2c
+mkdir -p $OVL
+cat /mnt/dtb.d/z7io_rtmi2c_overlay.dtb > $OVL/dtbo
+

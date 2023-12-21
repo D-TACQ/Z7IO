@@ -1,14 +1,18 @@
 #!/bin/sh
 # z7io late initialization after FPGA and device driver is loaded
 /usr/local/CARE/Z7IO/load.cpld_spi_overlay
-rm -f /dev/gpio/LED/FMC*
-nice /usr/local/CARE/Z7IO/z7io_init_gpio
-for s in 1 2; do
-	if [ "x$(cat /dev/gpio/fmc${s}_present)" = "x1" ]; then
-		rm -f /dev/sites/${s}/*
-	fi
-done
-FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" NOLOAD=1 /usr/local/CARE/Z7IO/z7io-fmc-scan
+
+if [ ! -L /dev/sites/1/eeprom ]; then
+	# it was a fake start, we need to fix some stuff
+	rm -f /dev/gpio/LED/FMC*
+	nice /usr/local/CARE/Z7IO/z7io_init_gpio
+	for s in 1 2; do
+		if [ "x$(cat /dev/gpio/fmc${s}_present)" = "x1" ]; then
+			rm -f /dev/sites/${s}/*
+		fi
+	done
+	FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" NOLOAD=1 /usr/local/CARE/Z7IO/z7io-fmc-scan
+fi
 
 mkdir -p /etc/acq400/0
 ln -s /usr/local/DESY_PY/acq400_z7io_trg_sel.py /etc/acq400/0/acq400_z7io_trg_sel
