@@ -343,7 +343,7 @@ time                      : 12:46:36
 bitstream data starts at  : 105
 bitstream data size       : 5979916
 ```
-1. Enumerate i2c
+2. Enumerate i2c
 /usr/local/CARE/Z7IO/load.rtmi2c_overlay
 
 ```
@@ -370,7 +370,7 @@ bitstream data size       : 5979916
 [   10.331658] cdns-i2c e0005000.i2c: 100 kHz mmio e0005000 irq 50
 
 ```
-1. gpio init
+3. gpio init
 /usr/local/CARE/Z7IO/z7io_init_gpio
 
 ```
@@ -382,7 +382,7 @@ bitstream data size       : 5979916
 ++ enable RTM power
 ++ z7io_init_gpio done
 ```
-1. Load the main FPGA
+4. Load the main FPGA
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" SITE2BUS=2 /usr/local/bin/fmc-scan
 
 ```
