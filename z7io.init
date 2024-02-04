@@ -30,7 +30,7 @@ echo 9 > /proc/sys/kernel/printk
 /usr/local/CARE/load.overlay z7io_mbox_overlay
 
 
-/mnt/local/bin/mmcinfo >/tmp/mmcinfo1.txt
+mmcinfo >/tmp/mmcinfo1.txt
 /usr/local/CARE/Z7IO/register_mmc_fru_units /tmp/mmcinfo1.txt
 
 # PS1="breakme5>" /bin/sh
