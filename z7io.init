@@ -23,8 +23,24 @@ gunzip < $BARE | xiloader -L
 /usr/local/CARE/Z7IO/z7io_init_gpio
 # PS1="breakme3>" /bin/sh
 
-FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2" SITE2BUS=2 /usr/local/bin/fmc-scan
+echo 9 > /proc/sys/kernel/printk
+/sbin/insmod /usr/local/lib/modules/i2c-xiic.ko
+/sbin/insmod /usr/local/lib/modules/mmc-mailbox-driver.ko
 # PS1="breakme4>" /bin/sh
+/usr/local/CARE/load.overlay z7io_mbox_overlay
+
+
+/mnt/local/bin/mmcinfo >/tmp/mmcinfo1.txt
+/usr/local/CARE/Z7IO/register_mmc_fru_units /tmp/mmcinfo1.txt
+
+# PS1="breakme5>" /bin/sh
+
+echo "Removing drivers to disable mbox"
+rmmod mmc_mailbox_driver
+rmmod i2c_xiic
+
+FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2 3" SITE2BUS=2 /usr/local/bin/fmc-scan
+# PS1="breakme6>" /bin/sh
 
 
 

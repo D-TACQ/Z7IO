@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+
+MMCINFO=$1
+
+get_details() {
+sed -n >/dev/sites/$1/details \
+-e '/Manufacturer  : / { s/Manufacturer  : /FRU_MAN="/; s/$/"/; p }' 		\
+-e '/Product name  : / { s/Product name  : /FRU_PROD_NAME="/; s/$/"/; p }' 	\
+-e '/Part number   : / { s/Part number   : /FRU_PART_NUM="/; s/$/"/; p }' 	\
+-e '/Serial number : / { s/Serial number : /FRU_SERIAL="/; s/$/"/; p }'		\
+	$2
+}
+fmc3_action() {
+	fru=/tmp/fmc3.txt
+	echo FMC3 PRESENT
+	echo 1 > /dev/gpio/fmc3_present
+	mkdir -p /dev/sites/3
+	echo dummy > /dev/sites/3/eeprom
+	grep -A 7 'FRU 2 description' /tmp/mmcinfo1.txt >$fru
+	get_details 3 $fru
+}
+
+
+
+rtm_action() {
+	fru=/tmp/rtm_fru.txt
+	echo RTM PRESENT
+	mkdir -p /dev/sites/RTM
+	echo dummy > /dev/sites/RTM/eeprom
+	grep -A 7 'FRU 1 description' /tmp/mmcinfo1.txt > $fru
+	get_details RTM $fru
+}
+
+
+mb_action() {
+	echo FRU0 PRESENT
+	fru=/tmp/mb_fru.txt
+	mkdir -p /dev/sites/AMC
+	echo dummy > /dev/sites/AMC/eeprom
+	grep -A 7 'FRU 0 description' /tmp/mmcinfo1.txt > $fru
+	get_details AMC $fru
+}
+
+
+grep -A 2 'FRU 2 status' /tmp/mmcinfo1.txt | tail -n 1 | grep 'Flags.*+Present' && fmc3_action
+grep -A 2 'FRU 1 status' /tmp/mmcinfo1.txt | tail -n 1 | grep 'Flags.*+Present' && rtm_action
+grep -A 2 'FRU 0 status' /tmp/mmcinfo1.txt | tail -n 1 | grep 'Flags.*+Present' && mb_action
+
+

@@ -1,0 +1,5 @@
+[submodule "mmc-mailbox"]
+	path = mmc-mailbox
+	url = https://github.com/D-TACQ/mmc-mailbox.git
+	branch = acq400
+
