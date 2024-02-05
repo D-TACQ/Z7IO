@@ -1,5 +1,7 @@
 #!/bin/sh
 # z7io late initialization after FPGA and device driver is loaded
+#
+echo z7io_late_init
 /usr/local/CARE/Z7IO/load.cpld_spi_overlay
 
 if [ ! -L /dev/sites/1/eeprom ]; then
