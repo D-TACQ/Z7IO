@@ -68,6 +68,8 @@ mkln $(gpioXXX  5) fmc2_present		AL
 mkln $(gpioXXX  6) VA_EN		AL
 mkln $(gpioXXX  7) VD_EN
 
+echo 0 > /dev/gpio/LED/FMC3_G
+echo 0 > /dev/gpio/LED/FMC3_R
 
 common_end	
 
