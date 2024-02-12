@@ -11,7 +11,7 @@ echo $HN > /etc/acq400/0/dtsn
 
 # PS1="breakme>" /bin/sh
 
-BARE=/mnt/fpga.d/Z7IO/Z7IO_TOP_BARE.bit.gz
+BARE=/mnt/z7io/Z7IO_TOP_BARE.bit.gz
 if [ -e /mnt/Z7IO_TOP_BARE.bit.gz ]; then
 	BARE=/mnt/Z7IO_TOP_BARE.bit.gz
 	echo using patch $BARE
