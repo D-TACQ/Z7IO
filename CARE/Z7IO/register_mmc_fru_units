@@ -15,6 +15,7 @@ fmc3_action() {
 	fru=/tmp/fmc3.txt
 	echo FMC3 PRESENT
 	echo 1 > /dev/gpio/fmc3_present
+	mkdir -p /dev/gpio/LED
 	echo 1 > /dev/gpio/LED/FMC3_G
 	mkdir -p /dev/sites/3
 	echo dummy > /dev/sites/3/eeprom
