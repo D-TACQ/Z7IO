@@ -4,7 +4,7 @@
 echo z7io_late_init
 /usr/local/CARE/Z7IO/load.cpld_spi_overlay
 
-if [ ! -L /dev/sites/1/eeprom ]; then
+if [ ! -e /tmp/mmcinfo1.txt ] && [ ! -L /dev/sites/1/eeprom ]; then
 	# it was a fake start, we need to fix some stuff
 	rm -f /dev/gpio/LED/FMC*
 	nice /usr/local/CARE/Z7IO/z7io_init_gpio
