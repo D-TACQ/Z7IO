@@ -18,12 +18,22 @@ get_gpiochip()
 # WARNING: MUST be BUS 2, if Z7IO bus expander is fleshed out in DT, this will change
 RTM_I2C_BUS=2
 
+mkdir -p /dev/gpio/LED
+echo 0 > /dev/gpio/LED/FMC3_G
+echo 0 > /dev/gpio/LED/FMC3_R
+
 retry=0
 while [ ! -e /sys/bus/i2c/devices/i2c-$RTM_I2C_BUS ]; do
 	usleep 500000
 	retry=$((retry+1))
 	if [ $retry -ge 10 ]; then
 		echo ERROR: ACQ400-MTCA-RTM2 NOT PRESENT
+		echo 0 > /dev/gpio/LED/FMC1_G
+		echo 0 > /dev/gpio/LED/FMC1_R
+		echo 0 > /dev/gpio/LED/FMC2_G
+		echo 0 > /dev/gpio/LED/FMC2_R
+		echo 0 > /dev/gpio/fmc1_present 
+		echo 0 > /dev/gpio/fmc2_present
 		exit 1
 	fi
 done
@@ -57,8 +67,6 @@ gpioXXX() {
 	echo gpio$lgp
 }
 
-
-mkdir -p /dev/gpio/LED
 mkln $(gpioXXX  0) LED/FMC1_G
 mkln $(gpioXXX  1) LED/FMC1_R
 mkln $(gpioXXX  2) LED/FMC2_G
@@ -68,8 +76,6 @@ mkln $(gpioXXX  5) fmc2_present		AL
 mkln $(gpioXXX  6) VA_EN		AL
 mkln $(gpioXXX  7) VD_EN
 
-echo 0 > /dev/gpio/LED/FMC3_G
-echo 0 > /dev/gpio/LED/FMC3_R
 
 common_end	
 
