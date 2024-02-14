@@ -5,8 +5,8 @@
 [ -e /mnt/z7io/uboot.env ] && UBOOT_ENV=/mnt/z7io/uboot.env
 [ -e /mnt/uboot.env ] && UBOOT_ENV=/mnt/uboot.env
 
-if [ -e $UBOOT_ENV ]; then
-	dump-cstrings < /mnt/uboot.env | 
+if [ ! -z $UBOOT_ENV ] && [ -e $UBOOT_ENV ]; then
+	dump-cstrings < $UBOOT_ENV |
 		grep -v \\$ | grep -v ' ' | grep -v devicetree_image >/tmp/u-boot_env
 		grep devicetree_acq400 /tmp/u-boot_env > /tmp/u-boot_env_tmp
 		sed -e 's/devicetree_acq400/devicetree_image/' \
