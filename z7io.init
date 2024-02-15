@@ -27,7 +27,7 @@ if [ -e /mnt/Z7IO_TOP_BARE.bit.gz ]; then
 	BARE=/mnt/Z7IO_TOP_BARE.bit.gz
 	echo using patch $BARE
 fi
-gunzip < $BARE | xiloader -L
+gunzip -c $BARE | xiloader -L 2>>/tmp/fpga_status
 # PS1="breakme2>" /bin/sh
 
 /usr/local/CARE/Z7IO/load.rtmi2c_overlay
