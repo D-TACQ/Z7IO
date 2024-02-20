@@ -22,34 +22,41 @@ echo $HN > /etc/acq400/0/dtsn
 
 # PS1="breakme>" /bin/sh
 
-BARE=/mnt/z7io/Z7IO_TOP_BARE.bit.gz
-if [ -e /mnt/Z7IO_TOP_BARE.bit.gz ]; then
-	BARE=/mnt/Z7IO_TOP_BARE.bit.gz
+/usr/local/CARE/load-fpga-stock
+BARE=/mnt/fpga.d/Z7IO_TOP_BARE.bit.gz
+if [ -e /mnt/z7io/Z7IO_TOP_BARE.bit.gz ]; then
+	BARE=/mnt/z7io/Z7IO_TOP_BARE.bit.gz
 	echo using patch $BARE
 fi
-gunzip -c $BARE | xiloader -L 2>>/tmp/fpga_status
+
+if [ -e $BARE ]; then
+	gunzip -c $BARE | xiloader -L 2>>/tmp/fpga_status
+	cp /tmp/fpga_status /tmp/fpga_status_bare
+
 # PS1="breakme2>" /bin/sh
 
-/usr/local/CARE/Z7IO/load.rtmi2c_overlay
-/usr/local/CARE/Z7IO/z7io_init_gpio
+	/usr/local/CARE/Z7IO/load.rtmi2c_overlay
+	/usr/local/CARE/Z7IO/z7io_init_gpio
 # PS1="breakme3>" /bin/sh
 
-echo 9 > /proc/sys/kernel/printk
-/sbin/insmod /usr/local/lib/modules/i2c-xiic.ko
+	echo 9 > /proc/sys/kernel/printk
+	/sbin/insmod /usr/local/lib/modules/i2c-xiic.ko
 
-MMC_MBOX_KO=/usr/local/lib/modules/mmc-mailbox-driver.ko
-[ -e /mnt/local/mmc-mailbox-driver.ko ] && 
-	MMC_MBOX_KO=/mnt/local/mmc-mailbox-driver.ko
-echo /sbin/insmod $MMC_MBOX_KO
-/sbin/insmod $MMC_MBOX_KO
+	MMC_MBOX_KO=/usr/local/lib/modules/mmc-mailbox-driver.ko
+	[ -e /mnt/local/mmc-mailbox-driver.ko ] &&
+		MMC_MBOX_KO=/mnt/local/mmc-mailbox-driver.ko
+	echo /sbin/insmod $MMC_MBOX_KO
+	/sbin/insmod $MMC_MBOX_KO
 #/sbin/insmod /usr/local/lib/modules/mmc-mailbox-driver.ko
 # PS1="breakme4>" /bin/sh
-/usr/local/CARE/load.overlay z7io_mbox_overlay
+	/usr/local/CARE/load.overlay z7io_mbox_overlay
 
 
-mmcinfo >/tmp/mmcinfo1.txt
-/usr/local/CARE/Z7IO/register_mmc_fru_units /tmp/mmcinfo1.txt
-
+	mmcinfo >/tmp/mmcinfo1.txt
+	/usr/local/CARE/Z7IO/register_mmc_fru_units /tmp/mmcinfo1.txt
+else
+	echo WARNING: $BARE did not exist, trying to continue..
+fi
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2 3" SITE2BUS=2 /usr/local/bin/fmc-scan
 # PS1="breakme6>" /bin/sh
 
