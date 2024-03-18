@@ -5,6 +5,7 @@
 [ -e /mnt/z7io/uboot.env ] && UBOOT_ENV=/mnt/z7io/uboot.env
 [ -e /mnt/uboot.env ] && UBOOT_ENV=/mnt/uboot.env
 
+
 if [ ! -z $UBOOT_ENV ] && [ -e $UBOOT_ENV ]; then
 	dump-cstrings < $UBOOT_ENV |
 		grep -v \\$ | grep -v ' ' | grep -v devicetree_image >/tmp/u-boot_env
@@ -20,7 +21,7 @@ HN=$(hostname)
 echo $HN > /etc/acq400/0/HN
 echo $HN > /etc/acq400/0/dtsn
 
-# PS1="breakme>" /bin/sh
+[ -d /mnt/EBREAK ] && PS1="breakme1>" /bin/sh
 
 /usr/local/CARE/load-fpga-stock
 BARE=/mnt/fpga.d/Z7IO_TOP_BARE.bit.gz
@@ -58,7 +59,7 @@ else
 	echo WARNING: $BARE did not exist, trying to continue..
 fi
 FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2 3" SITE2BUS=2 /usr/local/bin/fmc-scan
-# PS1="breakme6>" /bin/sh
+[ -d /mnt/EBREAK ] && PS1="breakme6>" /bin/sh
 
 
 

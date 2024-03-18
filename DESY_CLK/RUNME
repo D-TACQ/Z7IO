@@ -1,0 +1,2 @@
+./si-labs-clk-config.py 0x77 /mnt/local/Si5340-RevD-out0_40MHz_out1_40MHz_out2_200MHz-RTM_PLL-Registers.txt
+

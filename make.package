@@ -27,6 +27,9 @@ cp CARE/${BIGMODEL}/* opkg/usr/local/CARE/${BIGMODEL}
 cp ${MODEL}.map   opkg/usr/local/
 cp ${MODEL}.init ${MODEL}_late_init opkg/usr/local/init
 cp -a DESY_PY  opkg/usr/local
+cp -a DESY_CLK opkg/usr/local
+cp -a Z7IO_PLANS opkg/usr/local/CARE/
+
 
 tar czf release/${SEQ}-${MODEL}-${DC}.tgz -C opkg .
 rm -Rf ../PACKAGES/${SEQ}-${MODEL}*
