@@ -1,3 +1,0 @@
-#!/bin/sh
-# maps site number to i2c bus number
-echo 3
