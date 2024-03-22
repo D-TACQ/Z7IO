@@ -22,7 +22,7 @@ mkdir -p opkg/usr/local/bin \
  make)
 cp -a mmc-mailbox/lib* opkg/usr/local/lib/
 cp -a mmc-mailbox/mmcinfo opkg/usr/local/bin
-
+cp bin/* opkg/usr/local/bin
 cp CARE/${BIGMODEL}/* opkg/usr/local/CARE/${BIGMODEL}
 cp ${MODEL}.map   opkg/usr/local/
 cp ${MODEL}.init ${MODEL}_late_init opkg/usr/local/init

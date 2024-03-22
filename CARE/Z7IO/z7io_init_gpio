@@ -15,8 +15,8 @@ get_gpiochip()
 	echo $(basename $(echo /sys/bus/i2c/devices/$1-$2/gpio/gpiochip*))	
 }
 
-# WARNING: MUST be BUS 2, if Z7IO bus expander is fleshed out in DT, this will change
-RTM_I2C_BUS=2
+# WARNING: MUST be BUS 3
+RTM_I2C_BUS=3
 
 mkdir -p /dev/gpio/LED
 echo 0 > /dev/gpio/LED/FMC3_G
@@ -38,10 +38,10 @@ while [ ! -e /sys/bus/i2c/devices/i2c-$RTM_I2C_BUS ]; do
 	fi
 done
 
+echo get_gpiochip $RTM_I2C_BUS 0021 $(get_gpiochip $RTM_I2C_BUS 0021)
 
-
-CHIP121=$(get_gpiochip $RTM_I2C_BUS 0021) 
-let GPIO_MB1=${CHIP121#gpiochip*}
+CHIP_21=$(get_gpiochip $RTM_I2C_BUS 0021)
+let GPIO_MB1=${CHIP_21#gpiochip*}
 let GPIO_MB2=$GPIO_MB1+7
 
 
