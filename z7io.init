@@ -70,6 +70,7 @@ if [ -e $BARE ]; then
                 [ $(cat /dev/gpio/fmc${site}_present) -eq 1 ] &&
                         /usr/local/CARE/load.overlay z7io_rtm_elf${site}${geo}overlay
         done
+	/usr/local/CARE/Z7IO/z7io_init_hwmon
 # PS1="breakme6>" /bin/sh
 else
 	echo WARNING: $BARE did not exist, trying to continue..

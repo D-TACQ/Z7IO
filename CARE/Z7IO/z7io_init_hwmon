@@ -1,0 +1,37 @@
+#!/bin/sh
+# make logical names for all the HWMON
+
+LNAMES=/dev/hwmon/LNAMES
+mkdir $LNAMES
+for d in /sys/bus/i2c/devices/?-002[89a]; do
+	if [ "$(cat $d/name)" = "ad7417" ]; then
+		bname=$(basename $d)
+		bus=${bname%-*}
+		for temp in $d/hwmon/hwmon?/temp1_input; do
+			echo $temp
+			if [ -e $temp ]; then
+				SITE=
+				SN=
+				case $bus in
+				3)
+					[ "$bname" = "3-0029" ] && SN=2
+				 	SITE=RTM;;
+				4)
+					SITE=SITE1;;
+				5)
+					SITE=SITE2;;
+				esac
+				if [ ! -z $SITE ]; then
+					DST=$LNAMES/$SITE
+					mkdir -p ${DST}
+					ln -s $temp ${DST}/temp$SN
+					dn=$(dirname $temp)
+					for xx in in1_input in2_input in3_input in4_input; do
+						ln -s ${dn}/${xx} ${DST}/${xx%*_input}$SN
+					done
+				fi
+			fi
+		done
+	fi
+done
+
