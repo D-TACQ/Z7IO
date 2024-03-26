@@ -12,14 +12,15 @@ for d in /sys/bus/i2c/devices/?-002[89a]; do
 			if [ -e $temp ]; then
 				SITE=
 				SN=
+				LN=
 				case $bus in
 				3)
 					[ "$bname" = "3-0029" ] && SN=2
-				 	SITE=RTM;;
+					LN=0; SITE=RTM;;
 				4)
-					SITE=SITE1;;
+					LN=1; SITE=SITE1;;
 				5)
-					SITE=SITE2;;
+					LN=2; SITE=SITE2;;
 				esac
 				if [ ! -z $SITE ]; then
 					DST=$LNAMES/$SITE
@@ -29,6 +30,7 @@ for d in /sys/bus/i2c/devices/?-002[89a]; do
 					for xx in in1_input in2_input in3_input in4_input; do
 						ln -s ${dn}/${xx} ${DST}/${xx%*_input}$SN
 					done
+					[ ! -z $LN ] && ln -s $DST $LNAMES/$LN
 				fi
 			fi
 		done
