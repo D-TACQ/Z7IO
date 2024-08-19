@@ -6,6 +6,21 @@
 [ -e /mnt/uboot.env ] && UBOOT_ENV=/mnt/uboot.env
 
 
+
+z7io_zynq_flavour() {
+	case $(cat /sys/devices/soc0/soc_id) in
+	0x12)
+		echo Z7IO35;;
+	0x11)
+		echo Z7IO45;;
+	0xc|0x0c)
+		echo Z7IO;;
+	*)
+		echo "z7io_zynq_flavour unknown flavour $(cat /sys/devices/soc0/soc_id)"
+		PS1="error1>" /bin/sh;;
+	esac
+}
+
 if [ ! -z $UBOOT_ENV ] && [ -e $UBOOT_ENV ]; then
 	dump-cstrings < $UBOOT_ENV |
 		grep -v \\$ | grep -v ' ' | grep -v devicetree_image >/tmp/u-boot_env
@@ -26,10 +41,13 @@ echo $SITE2BUS >/etc/sysconfig/i2c_site2bus
 
 [ -d /mnt/EBREAK ] && PS1="breakme1>" /bin/sh
 
+ZF=$(z7io_zynq_flavour)
+ZBARE=${ZF}_TOP_BARE.bit.gz
+
 /usr/local/CARE/load-fpga-stock
-BARE=/mnt/fpga.d/Z7IO_TOP_BARE.bit.gz
-if [ -e /mnt/z7io/Z7IO_TOP_BARE.bit.gz ]; then
-	BARE=/mnt/z7io/Z7IO_TOP_BARE.bit.gz
+BARE=/mnt/fpga.d/${ZBARE}
+if [ -e /mnt/z7io/${ZBARE} ]; then
+	BARE=/mnt/z7io/${ZBARE}
 	echo using patch $BARE
 fi
 
@@ -75,7 +93,8 @@ if [ -e $BARE ]; then
 else
 	echo WARNING: $BARE did not exist, trying to continue..
 fi
-FMC_SCAN_FPGA=Z7IO FMC_SCAN_SITES="1 2 3" /usr/local/bin/fmc-scan
+echo "ready to scan FMC_SCAN_FPGA=$ZF FMC_SCAN_SITES="1 2 3" /usr/local/bin/fmc-scan"
+FMC_SCAN_FPGA=$ZF FMC_SCAN_SITES="1 2 3" /usr/local/bin/fmc-scan
 [ -d /mnt/EBREAK ] && PS1="breakme7>" /bin/sh
 
 
