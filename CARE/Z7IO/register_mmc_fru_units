@@ -12,15 +12,19 @@ sed -n >/dev/sites/$1/details \
 	$2
 }
 fmc3_action() {
-	fru=/tmp/fmc3.txt
-	echo FMC3 PRESENT
-	echo 1 > /dev/gpio/fmc3_present
-	mkdir -p /dev/gpio/LED
-	echo 1 > /dev/gpio/LED/FMC3_G
-	mkdir -p /dev/sites/3
-	echo dummy > /dev/sites/3/eeprom
-	grep -A 7 'FRU 2 description' /tmp/mmcinfo1.txt >$fru
-	get_details 3 $fru
+	if [ -e /dev/sites/3/eeprom ]; then
+		echo "INFO: site 3 eeprom already present: do nothing"
+	else
+		fru=/tmp/fmc3.txt
+		echo FMC3 PRESENT
+		echo 1 > /dev/gpio/fmc3_present
+		mkdir -p /dev/gpio/LED
+		echo 1 > /dev/gpio/LED/FMC3_G
+		mkdir -p /dev/sites/3
+		echo dummy > /dev/sites/3/eeprom
+		grep -A 7 'FRU 2 description' /tmp/mmcinfo1.txt >$fru
+		get_details 3 $fru
+	fi
 }
 
 
