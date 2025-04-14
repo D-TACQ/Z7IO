@@ -57,7 +57,7 @@ if [ -e $BARE ]; then
 	gunzip -c $BARE | xiloader -L 2>>/tmp/fpga_status
 	cp /tmp/fpga_status /tmp/fpga_status_bare
 
-# PS1="breakme2>" /bin/sh
+        [ -d /mnt/EBREAK ] && PS1="breakme2>" /bin/sh
 	echo 9 > /proc/sys/kernel/printk
 	/sbin/insmod /usr/local/lib/modules/i2c-xiic.ko
 
@@ -67,7 +67,7 @@ if [ -e $BARE ]; then
 	echo /sbin/insmod $MMC_MBOX_KO
 	/sbin/insmod $MMC_MBOX_KO
 #/sbin/insmod /usr/local/lib/modules/mmc-mailbox-driver.ko
-# PS1="breakme3>" /bin/sh
+        [ -d /mnt/EBREAK ] && PS1="breakme3>" /bin/sh
 	/usr/local/CARE/load.overlay z7io_mbox_overlay
 	mmcinfo >/tmp/mmcinfo1.txt
 	/usr/local/CARE/Z7IO/register_mmc_fru_units /tmp/mmcinfo1.txt
@@ -81,10 +81,10 @@ if [ -e $BARE ]; then
                         echo RTM GEOGRAPHICAL legacy
                         geo=_geo_
                 fi
-# PS1="breakme4>" /bin/sh
+                [ -d /mnt/EBREAK ] &&  PS1="breakme4>" /bin/sh
                 /usr/local/CARE/Z7IO/load.rtmi2c_overlay
                 /usr/local/CARE/Z7IO/z7io_init_gpio
-# PS1="breakme5>" /bin/sh
+                [ -d /mnt/EBREAK ] &&  PS1="breakme5>" /bin/sh
                 for site in 1 2; do
                         [ $(cat /dev/gpio/fmc${site}_present) -eq 1 ] &&
                                 /usr/local/CARE/load.overlay z7io_rtm_elf${site}${geo}overlay
@@ -96,7 +96,7 @@ if [ -e $BARE ]; then
                echo 0 > $LEDD/FMC1_G
                echo 0 > $LEDD/FMC2_G
         fi
-# PS1="breakme6>" /bin/sh
+        [ -d /mnt/EBREAK ] &&  PS1="breakme6>" /bin/sh
         FMC_SCAN_SITES="1 2"
         [ -e /dev/sites/3/eeprom ] && FMC_SCAN_SITES="$FMC_SCAN_SITES 3"
         export FMC_SCAN_SITES
